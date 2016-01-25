@@ -1,0 +1,131 @@
+<html>
+	<head>
+		<!-- Storage of global variables and their default values -->
+		<script src="globalVariables.js" type="text/javascript"></script>
+		<!-- Handles the generation of the map and parsing of the map variables -->
+		<script src="mapHandler.js" type="text/javascript"></script>
+		<!-- Handles the generation of the canvas and all visuals -->
+		<script src="canvasHandler.js" type="text/javascript"></script>
+		<!-- Handles all input events and several random functions -->
+		<script src="eventHandler.js" type="text/javascript"></script>
+		<!-- Handles all of the battle actions and events -->
+		<script src="battleHandler.js" type="text/javascript"></script>
+		<!-- Handles the character data and parses the character variables -->
+		<script src="characterHandler.js" type="text/javascript"></script>
+		<!-- Handles the enemy data and parses the enemy variables -->
+		<script src="enemyHandler.js" type="text/javascript"></script>
+		<!-- Handles the item data and parses the item variables -->
+		<script src="itemHandler.js" type="text/javascript"></script>
+		<!-- Handles the class data and parses the class variables -->
+		<script src="classMapHandler.js" type="text/javascript"></script>
+	</head>
+	<body>
+		<!-- Canvas is where the visuals are drawn. -->
+		<canvas id="canvas" width="1000" height="500" style="border:1.5px solid #000000;"></canvas>
+		<!-- All output messages to the user are put in this div -->
+		<div id="outputDiv" class="outputDiv"></div>
+		<script>
+			/* Declaration of Global Variables */
+			var canvas = document.getElementById("canvas");
+			var cContext = canvas.getContext("2d");
+			/* 
+				cPos = [X,Y,F]
+				x = horizontal location
+				y = vertical location
+				f = facing
+			*/
+			var cPos = [2,4,0];
+			/*
+				bPos = [0,1,2]
+				0 = Which menu you are currently at.
+				1 = Position in menu
+				2 = Target horizontal selection position
+				3 = Target vertical selection position
+			*/
+			var bPos = [0,0,0,0];
+			/*
+				mPos = [0,1,2,3]
+				0 = Position in start menu
+				1 = Which submenu you are currently in.
+				2 = Position you are in horizontally.
+				3 = Position you are in vertically.
+				4 = Sub-Sub menu position you are in (Item Selection)
+				5 = Sub-Sub menu item use character selection
+			*/
+			var mPos = [0,0,0,0,0,0];
+			var charArray = [];
+			var itemArray = [];
+			var enemyArray = [];
+			var classArray = [];
+			var nodeArray = [];
+			var beArray = [];
+			var inCombat = false;
+			var choosingTarget = false;
+			var choosingItem = false;
+			var numOfEnemies = [];
+			var map = [];
+			var key = 0;
+			var rng = 0;
+			var eATP = [];
+			var cATP = [0,0,0];
+			var attackOrderArray = [];
+			var actionPause = false;
+			var menuOpen = false;
+			var inventoryPos;
+			var charItemPos = 0;
+			var menuState = 0;
+			var startMenuMovePos = [0,0];
+			var classGridPos = [0,0];
+			var battleItemSelect = [0,0];
+			var showDescription = 0;
+			
+			/* Initial loading functions to instantiate all of the required variables with default values */
+			loadMap();
+			loadItems(); 
+			loadChar();
+			loadEnemies();
+			loadNodeArray();
+			loadClasses();
+			buildCanvas();
+			
+			/* 	
+				After loading, the below listens to input from the keyboard. 
+				The listener sends the key presses to different functions based on where the user is currently at in the game.
+				The key that is pressed it stored in a global variable called 'key'.
+			*/
+			window.onkeyup = function(e)
+			{
+				key = e.keyCode ? e.keyCode : e.which;
+				
+				if(inCombat == false)
+				{
+					if(menuOpen == false)
+					{
+						mapKeyPress();
+					}
+					else
+					{
+						startMenuKeyPress();
+					}
+				}
+				else
+				{
+					battleKeyPress();
+				}
+				
+			}
+		</script>
+		<style>
+			.outputDiv
+			{
+				width: 1000px;
+				height: 100px;
+				overflow: hidden;
+				border-style: solid;
+				border-width: 1px;
+				margin-top: 15px;
+				overflow-y: scroll;
+			}
+		</style>
+	</body>
+</html>
