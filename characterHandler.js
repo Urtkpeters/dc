@@ -35,7 +35,7 @@ function loadChar()
 		}
 		
 		/* General */
-		charArray[i][0] = [tempName,40,50,10,10,0,100,1,tempName+".jpg"];
+		charArray[i][0] = [tempName,40,50,10,10,0,100,1,"images/" + tempName+".jpg"];
 		
 		/* Buffs */
 		charArray[i][4] = [];

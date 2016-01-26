@@ -7,11 +7,11 @@ function loadItems()
 	
 	itemArray = 
 	[
-		['Empty',0,100,0,0,0,0.5,1.2,'empty.jpg',0],
-		['Dagger',5,90,0,0,0,.05,1.2,'dagger.jpg',0],
-		['Cloth Tunic',1,100,0,0,0,0,0,'clothTunic.jpg',0],
-		['Cloth Pants',1,100,0,0,0,0,0,'clothPants.jpg',0],
-		['Potion',50,100,0,0,0,0,1,'potion.jpg',1]
+		['Empty',0,100,0,0,0,0.5,1.2,'images/empty.jpg',0],
+		['Dagger',5,90,0,0,0,.05,1.2,'images/dagger.jpg',0],
+		['Cloth Tunic',1,100,0,0,0,0,0,'images/clothTunic.jpg',0],
+		['Cloth Pants',1,100,0,0,0,0,0,'images/clothPants.jpg',0],
+		['Potion',50,100,0,0,0,0,1,'images/potion.jpg',1]
 	]
 }
 
