@@ -12,7 +12,7 @@ function loadItems()
 		['Cloth Tunic',1,100,0,0,0,0,0,'images/clothTunic.jpg',0],
 		['Cloth Pants',1,100,0,0,0,0,0,'images/clothPants.jpg',0],
 		['Potion',50,100,0,0,0,0,1,'images/potion.jpg',1]
-	]
+	];
 }
 
 function getEquipmentNumber(equipNumber, statNumber, charNumber)
@@ -189,10 +189,10 @@ function calcInventoryPosition()
 
 function swapInventoryPositions()
 {
-	var charItemPos1;
-	var charItemPos2;
-	var inventoryPos1;
-	var inventoryPos2;
+	var charItemPos1 = 0;
+	var charItemPos2 = 0;
+	var inventoryPos1 = 0;
+	var inventoryPos2 = 0;
 	var tempHold;
 	
 	if(mPos[2] == 0 || mPos[2] == 1)
@@ -203,7 +203,7 @@ function swapInventoryPositions()
 	{
 		charItemPos1 = 1;
 	}
-	else if(mPos[2] == 4 || mPos[2] == 5)
+	else
 	{
 		charItemPos1 = 2;
 	}
@@ -217,7 +217,7 @@ function swapInventoryPositions()
 	{
 		charItemPos2 = 1;
 	}
-	else if(startMenuMovePos[0] == 4 || startMenuMovePos[0] == 5)
+	else
 	{
 		charItemPos2 = 2;
 	}

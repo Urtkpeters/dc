@@ -2,8 +2,10 @@ function loadMap()
 {
 
 	/* Overhead view of the map */
-	var tempMap = 
-	[
+	var tempMap = [];
+	
+	tempMap.push
+	(
 		[0,0,0,0,0,0,0,0],
 		[0,0,1,0,0,0,0,0],
 		[0,0,1,1,1,0,0,0],
@@ -12,7 +14,7 @@ function loadMap()
 		[0,1,0,0,0,0,1,0],
 		[0,1,1,1,1,1,1,0],
 		[0,0,0,0,0,0,0,0]
-	]
+	);
 	
 	
 	/* 
@@ -20,11 +22,11 @@ function loadMap()
 			[[4,2,2,1,1,1,2],[3,2,1,1,1,2,1],[1,2,2,0,0,0,0],[2,1,2,1,1,0,0]]
 		The above is for the last row with a 1 in it, the second 1 from the left. Example shows directions based on the heading starting at North, East, South West.
 	*/
-	for(i = 0; i < tempMap.length; i++)
+	for(var i = 0; i < tempMap.length; i++)
 	{
-		for(j = 0; j < tempMap[i].length; j++)
+		for(var j = 0; j < tempMap[i].length; j++)
 		{
-			for(k = 0; k < 4; k++)
+			for(var k = 0; k < 4; k++)
 			{
 				var wallA = 0;
 				var wallB = 0;

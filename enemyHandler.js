@@ -24,12 +24,12 @@ function loadEnemies()
 				[]
 			]
 		]
-	]
+	];
 }
 
 function getBattleEnemies()
 {
-	for(i = 0; i < numOfEnemies.length; i++)
+	for(var i = 0; i < numOfEnemies.length; i++)
 	{
 		/* Need to randomize battles based on area */
 		beArray.push([]);

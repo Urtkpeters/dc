@@ -541,7 +541,7 @@ function buildMenuBackgrounds()
 
 function buildTopMenus()
 {
-	for(i = 0; i < 3; i++)
+	for(var i = 0; i < 3; i++)
 	{
 		var xPlus = (i * 255) + 70;
 		
@@ -572,10 +572,10 @@ function buildTopMenus()
 		cContext.closePath();
 		
 		cContext.fillStyle = "#FFFFFF";
-		cContext.fillText(charArray[i][0][0],100+xPlus,18)
-		cContext.fillText("HP: " + charArray[i][0][1] + " / " + charArray[i][0][2],100+xPlus,33)
-		cContext.fillText("MP: " + charArray[i][0][3] + " / " + charArray[i][0][4],100+xPlus,48)
-		cContext.fillText("Status: ",100+xPlus,63)
+		cContext.fillText(charArray[i][0][0],100+xPlus,18);
+		cContext.fillText("HP: " + charArray[i][0][1] + " / " + charArray[i][0][2],100+xPlus,33);
+		cContext.fillText("MP: " + charArray[i][0][3] + " / " + charArray[i][0][4],100+xPlus,48);
+		cContext.fillText("Status: ",100+xPlus,63);
 	}
 }
 
@@ -589,7 +589,7 @@ function buildCommandMenus()
 	charImage.onload = function()
 	{
 		cContext.drawImage(charImage, 175, 425, 75, 75);
-	}
+	};
 	
 	/* Bottom Text Menu */
 	/* Base Menu */
@@ -634,11 +634,11 @@ function buildCommandMenus()
 		cContext.fillStyle = "#FFFFFF";
 		cContext.font = "18px Arial";
 		
-		cContext.fillText("Attack",290,466.5)
-		cContext.fillText("Skills",390,466.5)
-		cContext.fillText("Items",475,466.5)
-		cContext.fillText("Defend",565,466.5)
-		cContext.fillText("Run",665,466.5)
+		cContext.fillText("Attack",290,466.5);
+		cContext.fillText("Skills",390,466.5);
+		cContext.fillText("Items",475,466.5);
+		cContext.fillText("Defend",565,466.5);
+		cContext.fillText("Run",665,466.5);
 		
 		/* Selection Arrow */
 		cContext.beginPath();
@@ -671,7 +671,7 @@ function buildBlankMenu()
 function buildMonster()
 {
 	var enemyImage = [];
-	for(i = 0; i < numOfEnemies.length; i++)
+	for(var i = 0; i < numOfEnemies.length; i++)
 	{
 		enemyImage.push(new Image());
 	}
@@ -683,7 +683,7 @@ function buildMonster()
 			enemyImage[0].onload = function()
 			{
 				cContext.drawImage(enemyImage[0], 450, 310, 100, 100);
-			}
+			};
 			break;
 		case 2:
 			if(numOfEnemies[0] == 1)
@@ -692,7 +692,7 @@ function buildMonster()
 				enemyImage[0].onload = function()
 				{
 					cContext.drawImage(enemyImage[0], 283, 310, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[1] == 1)
@@ -701,7 +701,7 @@ function buildMonster()
 				enemyImage[1].onload = function()
 				{
 					cContext.drawImage(enemyImage[1], 616, 310, 100, 100);
-				}
+				};
 			}
 			break;
 		case 3:
@@ -711,7 +711,7 @@ function buildMonster()
 				enemyImage[0].onload = function()
 				{
 					cContext.drawImage(enemyImage[0], 200, 310, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[1] == 1)
@@ -720,7 +720,7 @@ function buildMonster()
 				enemyImage[1].onload = function()
 				{
 					cContext.drawImage(enemyImage[1], 450, 310, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[2] == 1)
@@ -729,7 +729,7 @@ function buildMonster()
 				enemyImage[2].onload = function()
 				{
 					cContext.drawImage(enemyImage[2], 700, 310, 100, 100);
-				}
+				};
 			}
 			break;
 		case 4:
@@ -739,7 +739,7 @@ function buildMonster()
 				enemyImage[1].onload = function()
 				{
 					cContext.drawImage(enemyImage[1], 365, 260, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[2] == 1)
@@ -748,7 +748,7 @@ function buildMonster()
 				enemyImage[2].onload = function()
 				{
 					cContext.drawImage(enemyImage[2], 535, 260, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[0] == 1)
@@ -757,7 +757,7 @@ function buildMonster()
 				enemyImage[0].onload = function()
 				{
 					cContext.drawImage(enemyImage[0], 200, 310, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[3] == 1)
@@ -766,7 +766,7 @@ function buildMonster()
 				enemyImage[3].onload = function()
 				{
 					cContext.drawImage(enemyImage[3], 700, 310, 100, 100);
-				}
+				};
 			}
 			break;
 		case 5:
@@ -776,7 +776,7 @@ function buildMonster()
 				enemyImage[1].onload = function()
 				{
 					cContext.drawImage(enemyImage[1], 325, 260, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[3] == 1)
@@ -785,7 +785,7 @@ function buildMonster()
 				enemyImage[3].onload = function()
 				{
 					cContext.drawImage(enemyImage[3], 575, 260, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[0] == 1)
@@ -794,7 +794,7 @@ function buildMonster()
 				enemyImage[0].onload = function()
 				{
 					cContext.drawImage(enemyImage[0], 200, 310, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[2] == 1)
@@ -803,7 +803,7 @@ function buildMonster()
 				enemyImage[2].onload = function()
 				{
 					cContext.drawImage(enemyImage[2], 450, 310, 100, 100);
-				}
+				};
 			}
 			
 			if(numOfEnemies[4] == 1)
@@ -812,7 +812,7 @@ function buildMonster()
 				enemyImage[4].onload = function()
 				{
 					cContext.drawImage(enemyImage[4], 700, 310, 100, 100);
-				}
+				};
 			}
 			break;
 	}
@@ -1054,11 +1054,11 @@ function buildStartMenu()
 	cContext.fillStyle = "#FFFFFF";
 	cContext.font = "18px Arial";
 	
-	cContext.fillText("Items",285,466.5)
-	cContext.fillText("Skills",370,466.5)
-	cContext.fillText("Equipment",455,466.5)
-	cContext.fillText("Status",580,466.5)
-	cContext.fillText("Class",662,466.5)
+	cContext.fillText("Items",285,466.5);
+	cContext.fillText("Skills",370,466.5);
+	cContext.fillText("Equipment",455,466.5);
+	cContext.fillText("Status",580,466.5);
+	cContext.fillText("Class",662,466.5);
 	
 	/* Selection Arrow */
 	if(mPos[1] == 0)
@@ -1087,7 +1087,7 @@ function buildSubMenus()
 	cContext.fill();
 	cContext.closePath();
 	
-	for(i = 0; i < charArray.length; i++)
+	for(var i = 0; i < charArray.length; i++)
 	{
 		var xPlus = (i * 255) + 70;
 		
@@ -1115,12 +1115,12 @@ function buildItemMenu()
 	var itemImages = [];
 	var loadImages = [];
 	var itemNames = [];
-	for(i = 0; i < 3; i++)
+	for(var i = 0; i < 3; i++)
 	{
 		itemImages.push([]);
 		loadImages.push([]);
 		itemNames.push([]);
-		for(j = 0; j < 12; j++)
+		for(var j = 0; j < 12; j++)
 		{
 			itemImages[i].push(itemArray[charArray[i][8][j]][8]);
 			loadImages[i].push(new Image());
@@ -1133,219 +1133,219 @@ function buildItemMenu()
 	loadImages[0][0].onload = function()
 	{
 		cContext.drawImage(loadImages[0][0], 180, 100, 40, 40);
-	}
+	};
 	
 	loadImages[0][1].src = itemImages[0][1];
 	loadImages[0][1].onload = function()
 	{
 		cContext.drawImage(loadImages[0][1], 247, 100, 40, 40);
-	}
+	};
 	
 	loadImages[0][2].src = itemImages[0][2];
 	loadImages[0][2].onload = function()
 	{
 		cContext.drawImage(loadImages[0][2], 180, 150, 40, 40);
-	}
+	};
 	
 	loadImages[0][3].src = itemImages[0][3];
 	loadImages[0][3].onload = function()
 	{
 		cContext.drawImage(loadImages[0][3], 247, 150, 40, 40);
-	}
+	};
 	
 	loadImages[0][4].src = itemImages[0][4];
 	loadImages[0][4].onload = function()
 	{
 		cContext.drawImage(loadImages[0][4], 180, 200, 40, 40);
-	}
+	};
 	
 	loadImages[0][5].src = itemImages[0][5];
 	loadImages[0][5].onload = function()
 	{
 		cContext.drawImage(loadImages[0][5], 247, 200, 40, 40);
-	}
+	};
 	
 	loadImages[0][6].src = itemImages[0][6];
 	loadImages[0][6].onload = function()
 	{
 		cContext.drawImage(loadImages[0][6], 180, 250, 40, 40);
-	}
+	};
 	
 	loadImages[0][7].src = itemImages[0][7];
 	loadImages[0][7].onload = function()
 	{
 		cContext.drawImage(loadImages[0][7], 247, 250, 40, 40);
-	}
+	};
 	
 	loadImages[0][8].src = itemImages[0][8];
 	loadImages[0][8].onload = function()
 	{
 		cContext.drawImage(loadImages[0][8], 180, 300, 40, 40);
-	}
+	};
 	
 	loadImages[0][9].src = itemImages[0][9];
 	loadImages[0][9].onload = function()
 	{
 		cContext.drawImage(loadImages[0][9], 247, 300, 40, 40);
-	}
+	};
 	
 	loadImages[0][10].src = itemImages[0][10];
 	loadImages[0][10].onload = function()
 	{
 		cContext.drawImage(loadImages[0][10], 180, 350, 40, 40);
-	}
+	};
 	
 	loadImages[0][11].src = itemImages[0][11];
 	loadImages[0][11].onload = function()
 	{
 		cContext.drawImage(loadImages[0][11], 247, 350, 40, 40);
-	}
+	};
 	
 	/* Character 2 */
 	loadImages[1][0].src = itemImages[1][0];
 	loadImages[1][0].onload = function()
 	{
 		cContext.drawImage(loadImages[1][0], 435, 100, 40, 40);
-	}
+	};
 	
 	loadImages[1][1].src = itemImages[1][1];
 	loadImages[1][1].onload = function()
 	{
 		cContext.drawImage(loadImages[1][1], 502, 100, 40, 40);
-	}
+	};
 	
 	loadImages[1][2].src = itemImages[1][2];
 	loadImages[1][2].onload = function()
 	{
 		cContext.drawImage(loadImages[1][2], 435, 150, 40, 40);
-	}
+	};
 	
 	loadImages[1][3].src = itemImages[1][3];
 	loadImages[1][3].onload = function()
 	{
 		cContext.drawImage(loadImages[1][3], 502, 150, 40, 40);
-	}
+	};
 	
 	loadImages[1][4].src = itemImages[1][4];
 	loadImages[1][4].onload = function()
 	{
 		cContext.drawImage(loadImages[1][4], 435, 200, 40, 40);
-	}
+	};
 	
 	loadImages[1][5].src = itemImages[1][5];
 	loadImages[1][5].onload = function()
 	{
 		cContext.drawImage(loadImages[1][5], 502, 200, 40, 40);
-	}
+	};
 	
 	loadImages[1][6].src = itemImages[1][6];
 	loadImages[1][6].onload = function()
 	{
 		cContext.drawImage(loadImages[1][6], 435, 250, 40, 40);
-	}
+	};
 	
 	loadImages[1][7].src = itemImages[1][7];
 	loadImages[1][7].onload = function()
 	{
 		cContext.drawImage(loadImages[1][7], 502, 250, 40, 40);
-	}
+	};
 	
 	loadImages[1][8].src = itemImages[1][8];
 	loadImages[1][8].onload = function()
 	{
 		cContext.drawImage(loadImages[1][8], 435, 300, 40, 40);
-	}
+	};
 	
 	loadImages[1][9].src = itemImages[1][9];
 	loadImages[1][9].onload = function()
 	{
 		cContext.drawImage(loadImages[1][9], 502, 300, 40, 40);
-	}
+	};
 	
 	loadImages[1][10].src = itemImages[1][10];
 	loadImages[1][10].onload = function()
 	{
 		cContext.drawImage(loadImages[1][10], 435, 350, 40, 40);
-	}
+	};
 	
 	loadImages[1][11].src = itemImages[1][11];
 	loadImages[1][11].onload = function()
 	{
 		cContext.drawImage(loadImages[1][11], 502, 350, 40, 40);
-	}
+	};
 	
 	/* Character 3 */
 	loadImages[2][0].src = itemImages[2][0];
 	loadImages[2][0].onload = function()
 	{
 		cContext.drawImage(loadImages[2][0], 690, 100, 40, 40);
-	}
+	};
 	
 	loadImages[2][1].src = itemImages[2][1];
 	loadImages[2][1].onload = function()
 	{
 		cContext.drawImage(loadImages[2][1], 757, 100, 40, 40);
-	}
+	};
 	
 	loadImages[2][2].src = itemImages[2][2];
 	loadImages[2][2].onload = function()
 	{
 		cContext.drawImage(loadImages[2][2], 690, 150, 40, 40);
-	}
+	};
 	
 	loadImages[2][3].src = itemImages[2][3];
 	loadImages[2][3].onload = function()
 	{
 		cContext.drawImage(loadImages[2][3], 757, 150, 40, 40);
-	}
+	};
 	
 	loadImages[2][4].src = itemImages[2][4];
 	loadImages[2][4].onload = function()
 	{
 		cContext.drawImage(loadImages[2][4], 690, 200, 40, 40);
-	}
+	};
 	
 	loadImages[2][5].src = itemImages[2][5];
 	loadImages[2][5].onload = function()
 	{
 		cContext.drawImage(loadImages[2][5], 757, 200, 40, 40);
-	}
+	};
 	
 	loadImages[2][6].src = itemImages[2][6];
 	loadImages[2][6].onload = function()
 	{
 		cContext.drawImage(loadImages[2][6], 690, 250, 40, 40);
-	}
+	};
 	
 	loadImages[2][7].src = itemImages[2][7];
 	loadImages[2][7].onload = function()
 	{
 		cContext.drawImage(loadImages[2][7], 757, 250, 40, 40);
-	}
+	};
 	
 	loadImages[2][8].src = itemImages[2][8];
 	loadImages[2][8].onload = function()
 	{
 		cContext.drawImage(loadImages[2][8], 690, 300, 40, 40);
-	}
+	};
 	
 	loadImages[2][9].src = itemImages[2][9];
 	loadImages[2][9].onload = function()
 	{
 		cContext.drawImage(loadImages[2][9], 757, 300, 40, 40);
-	}
+	};
 	
 	loadImages[2][10].src = itemImages[2][10];
 	loadImages[2][10].onload = function()
 	{
 		cContext.drawImage(loadImages[2][10], 690, 350, 40, 40);
-	}
+	};
 	
 	loadImages[2][11].src = itemImages[2][11];
 	loadImages[2][11].onload = function()
 	{
 		cContext.drawImage(loadImages[2][11], 757, 350, 40, 40);
-	}
+	};
 	
 	var columnX = 0;
 	
@@ -1434,7 +1434,7 @@ function buildItemMenu()
 	
 	calcInventoryPosition();
 	
-	cContext.fillText(itemNames[charItemPos][inventoryPos],textPosX,textPosY)
+	cContext.fillText(itemNames[charItemPos][inventoryPos],textPosX,textPosY);
 	if(menuState >= 1)
 	{
 		cContext.strokeStyle = "#FFFFFF";
@@ -1521,7 +1521,7 @@ function buildBattleItemSelect()
 	var loadImages = [];
 	var itemNames = [];
 	
-	for(i = 0; i < 12; i++)
+	for(var i = 0; i < 12; i++)
 	{
 		itemImages.push(itemArray[charArray[attackOrderArray[0]][8][i]][8]);
 		loadImages.push(new Image());
@@ -1533,73 +1533,73 @@ function buildBattleItemSelect()
 	loadImages[0].onload = function()
 	{
 		cContext.drawImage(loadImages[0], 180+xPlus, 100, 40, 40);
-	}
+	};
 	
 	loadImages[1].src = itemImages[1];
 	loadImages[1].onload = function()
 	{
 		cContext.drawImage(loadImages[1], 247+xPlus, 100, 40, 40);
-	}
+	};
 	
 	loadImages[2].src = itemImages[2];
 	loadImages[2].onload = function()
 	{
 		cContext.drawImage(loadImages[2], 180+xPlus, 150, 40, 40);
-	}
+	};
 	
 	loadImages[3].src = itemImages[3];
 	loadImages[3].onload = function()
 	{
 		cContext.drawImage(loadImages[3], 247+xPlus, 150, 40, 40);
-	}
+	};
 	
 	loadImages[4].src = itemImages[4];
 	loadImages[4].onload = function()
 	{
 		cContext.drawImage(loadImages[4], 180+xPlus, 200, 40, 40);
-	}
+	};
 	
 	loadImages[5].src = itemImages[5];
 	loadImages[5].onload = function()
 	{
 		cContext.drawImage(loadImages[5], 247+xPlus, 200, 40, 40);
-	}
+	};
 	
 	loadImages[6].src = itemImages[6];
 	loadImages[6].onload = function()
 	{
 		cContext.drawImage(loadImages[6], 180+xPlus, 250, 40, 40);
-	}
+	};
 	
 	loadImages[7].src = itemImages[7];
 	loadImages[7].onload = function()
 	{
 		cContext.drawImage(loadImages[7], 247+xPlus, 250, 40, 40);
-	}
+	};
 	
 	loadImages[8].src = itemImages[8];
 	loadImages[8].onload = function()
 	{
 		cContext.drawImage(loadImages[8], 180+xPlus, 300, 40, 40);
-	}
+	};
 	
 	loadImages[9].src = itemImages[9];
 	loadImages[9].onload = function()
 	{
 		cContext.drawImage(loadImages[9], 247+xPlus, 300, 40, 40);
-	}
+	};
 	
 	loadImages[10].src = itemImages[10];
 	loadImages[10].onload = function()
 	{
 		cContext.drawImage(loadImages[10], 180+xPlus, 350, 40, 40);
-	}
+	};
 	
 	loadImages[11].src = itemImages[11];
 	loadImages[11].onload = function()
 	{
 		cContext.drawImage(loadImages[11], 247+xPlus, 350, 40, 40);
-	}
+	};
 	
 	/* Background and Border */
 	cContext.strokeStyle = "#FFFFFF";
@@ -1703,7 +1703,7 @@ function buildBattleItemSelect()
 	
 	calcInventoryPosition();
 	
-	cContext.fillText(itemNames[inventoryPos],textPosX,textPosY)
+	cContext.fillText(itemNames[inventoryPos],textPosX,textPosY);
 }
 
 function buildStatusMenu()
@@ -1817,6 +1817,12 @@ function buildStatusMenu()
 	}
 	else if(menuState == 2)
 	{
+		cContext.fillStyle = "#FFFFFF";
+		cContext.font = "22px Arial";
+		cContext.textAlign="center";
+		cContext.fillText('Squire',490,105);
+		
+		/* Black background box for grid */
 		cContext.fillStyle = '#000000';
 		cContext.strokeStyle = '#000000';
 		cContext.beginPath();
@@ -1827,13 +1833,13 @@ function buildStatusMenu()
 		cContext.lineTo(190,125);
 		cContext.fill();
 		/* Vertical Lines */
-		for(i = 0; i < 30; i++)
+		for(var i = 0; i < 30; i++)
 		{
 			cContext.moveTo(200+(20*i),125);
 			cContext.lineTo(200+(20*i),405);
 		}
 		/* Horizontal Lines */
-		for(i = 0; i < 14; i++)
+		for(var i = 0; i < 14; i++)
 		{
 			cContext.moveTo(190,135+(20*i));
 			cContext.lineTo(790,135+(20*i));
@@ -1842,6 +1848,7 @@ function buildStatusMenu()
 		cContext.stroke();
 		cContext.closePath();
 		
+		/* Yellow background box for selection box */
 		cContext.beginPath();
 		cContext.fillStyle = '#E3E600';
 		cContext.moveTo(480,255);
@@ -1856,9 +1863,10 @@ function buildStatusMenu()
 		
 		var classNumber = getClassNumber();
 		
-		for(i = 0; i < 15; i++)
+		/* Loops through whole grid row by row */
+		for(var i = 0; i < 15; i++)
 		{
-			for(j = 0; j < 31; j++)
+			for(var j = 0; j < 31; j++)
 			{
 				var yCoord = (startMenuMovePos[1] + i) - 7;
 				var xCoord = (startMenuMovePos[0] + j) - 15;
@@ -1867,6 +1875,7 @@ function buildStatusMenu()
 				var leftAdj = 0;
 				var rightAdj = 0;
 				
+				/* This is for adjusting the border node sizes as they are only partially shown. */
 				/* Top left */
 				if(i == 0 && j == 0)
 				{
@@ -1915,6 +1924,7 @@ function buildStatusMenu()
 					}
 				}
 				
+				/* If it is outside of the classGrid coordinates then make it black */
 				if(xCoord < 0 || xCoord > 30 || yCoord < 0 || yCoord > 13 )
 				{
 					cContext.beginPath();
@@ -1926,14 +1936,14 @@ function buildStatusMenu()
 					cContext.fill();
 					cContext.closePath();
 				}
+				/* Else check to se what color it is and color the node to match */
 				else
 				{
-					console.log(classArray[mPos[5]][classNumber][yCoord][xCoord]);
 					if(classArray[mPos[5]][classNumber][yCoord][xCoord] == 0)
 					{
 						cContext.fillStyle = '#000000';
 					}
-					else if(classArray[mPos[5]][classNumber][yCoord][xCoord][8] > 0)
+					else if(classArray[mPos[5]][classNumber][yCoord][xCoord][8] >= 0)
 					{
 						switch(classArray[mPos[5]][classNumber][yCoord][xCoord][8])
 						{
@@ -1944,7 +1954,7 @@ function buildStatusMenu()
 								cContext.fillStyle = '#FFFFFF';
 								break;
 							case 2:
-								cContext.fillStyle = '#007469';
+								cContext.fillStyle = '#FF0000';
 								break;
 							case 3:
 								cContext.fillStyle = '#0033CC';
@@ -1962,6 +1972,48 @@ function buildStatusMenu()
 					cContext.closePath();
 				}
 			}
+		}
+		
+		/* For displaying left wing menu for node stats */
+		/* Background and Border */
+		cContext.strokeStyle = "#FFFFFF";
+		cContext.fillStyle = "#0033CC";
+		cContext.beginPath();
+		cContext.moveTo(15, 75);
+		cContext.lineTo(160, 75);
+		cContext.quadraticCurveTo(170, 75, 170, 85);
+		cContext.lineTo(170, 415);
+		cContext.quadraticCurveTo(170, 425, 160, 425);
+		cContext.lineTo(15, 425);
+		cContext.quadraticCurveTo(5, 425, 5, 415);
+		cContext.lineTo(5, 85);
+		cContext.quadraticCurveTo(5, 75, 15, 75);
+		cContext.fill();
+		cContext.stroke();
+		cContext.closePath();
+		
+		if(classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][8] > 0)
+		{
+			tmpNodeName = classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][0];
+		}
+		else
+		{
+			tmpNodeName = 'Undiscovered';
+		}
+		
+		cContext.fillStyle = "#FFFFFF";
+		cContext.font = "20px Arial";
+		cContext.textAlign="center";
+		cContext.fillText(tmpNodeName,86,110);
+		
+		if(tmpNodeName != 'Undiscovered' && tmpNodeName != 'Empty')
+		{
+			cContext.font = "14px Arial";
+			cContext.textAlign="left";
+			cContext.fillText('Strength: 2',15,150);
+			cContext.fillText('Intelligence: 35',15,166);
+			cContext.fillText('Vitality: 14',15,182);
+			cContext.fillText('Agility: 1',15,198);
 		}
 	}
 }

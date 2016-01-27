@@ -1,36 +1,38 @@
 function loadChar()
 {
 	/*
-		~~ NEW BELOW ~~
-		0. General   - Name, Current HP, Max HP, Current MP, Max MP, Current XP, Max XP, Level, Image Name
-		1. Offence   - Damage Min, Damage Max, Hit Chance, Crit Chance, Crit Power, Speed, Status Effect, Status Effect Chance
-		2. Defence   - Dodge Chance, Block Chance, Block Reduction, Defence Reduction, Spell Dodge Chance, Resistance Reduction, Status damage resistance
-		3. Magic     - Power Factor, Heal Factor, Magic Hit Chance
-		4. Buffs     - List of buff IDs
-		5. Debuffs   - List of debuff IDs
-		6. Stats     - Strength, Agility, Vitality, Intelligence
-		7. Equipment - Main Hand, Off-Hand, Head, Chest, Hands, Legs, Feet, Accessory
-		8. Inventory - List of item IDs
-		9. Classes   - Current Class, Squire Current, Squire Max, Squire Level
+		0.  General   - Name, Current HP, Max HP, Current MP, Max MP, Current XP, Max XP, Level, Image Name
+		1.  Offence   - Damage Min, Damage Max, Hit Chance, Crit Chance, Crit Power, Speed, Status Effect, Status Effect Chance
+		2.  Defence   - Dodge Chance, Block Chance, Block Reduction, Defence Reduction, Spell Dodge Chance, Resistance Reduction, Status damage resistance
+		3.  Magic     - Power Factor, Heal Factor, Magic Hit Chance
+		4.  Buffs     - List of buff IDs
+		5.  Debuffs   - List of debuff IDs
+		6.  Stats     - Strength, Agility, Vitality, Intelligence
+		7.  Equipment - Main Hand, Off-Hand, Head, Chest, Hands, Legs, Feet, Accessory
+		8.  Inventory - List of item IDs
+		9.  Classes   - Current Class, Squire Current, Squire Max, Squire Level
+		10. Skills
 		
 			Strength = Damage of attack, Amount of damage blocked
 			Agility = Speed in attack order, dodge chance
 			Vitality = Max life, Status damage resistance, block chance
 			Intelligence = Magic damage, Magic resistance
 	*/
-	for(i = 0; i < 3; i++)
+	var tempName = '';
+	
+	for(var i = 0; i < 3; i++)
 	{
 		charArray.push([]);
 		switch(i)
 		{
 			case 0:
-				var tempName = 'Frank';
+				tempName = 'Frank';
 				break;
 			case 1:
-				var tempName = 'Ann';
+				tempName = 'Ann';
 				break;
 			case 2:
-				var tempName = 'Bertrand';
+				tempName = 'Bertrand';
 				break;
 		}
 		
@@ -57,28 +59,32 @@ function loadChar()
 		charArray[i][9] = [0,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1];
 		
 		var tmpAgi = charArray[i][6][1];
-		var tmpSpeed;
+		var tmpSpeed = 1;
 		
-		if(tmpAgi == 0){tmpSpeed = 1}
-		else if(tmpAgi == 1){tmpSpeed = 2}
-		else if(tmpAgi == 2){tmpSpeed = 3}
-		else if(tmpAgi == 3 || tmpAgi == 4){tmpSpeed = 4}
-		else if(tmpAgi >= 5 && tmpAgi <= 10){tmpSpeed = 5}
-		else if(tmpAgi >= 11 && tmpAgi <= 14){tmpSpeed = 6}
-		else if(tmpAgi >= 15 && tmpAgi <= 19){tmpSpeed = 7}
-		else if(tmpAgi >= 20 && tmpAgi <= 24){tmpSpeed = 8}
-		else if(tmpAgi >= 25 && tmpAgi <= 29){tmpSpeed = 9}
-		else if(tmpAgi >= 30 && tmpAgi <= 39){tmpSpeed = 10}
-		else if(tmpAgi >= 40 && tmpAgi <= 49){tmpSpeed = 11}
-		else if(tmpAgi >= 50 && tmpAgi <= 59){tmpSpeed = 12}
-		else if(tmpAgi >= 60 && tmpAgi <= 69){tmpSpeed = 13}
-		else if(tmpAgi >= 70 && tmpAgi <= 79){tmpSpeed = 14}
-		else if(tmpAgi >= 80 && tmpAgi <= 99){tmpSpeed = 15}
-		else if(tmpAgi >= 100 && tmpAgi <= 124){tmpSpeed = 16}
-		else if(tmpAgi >= 125 && tmpAgi <= 149){tmpSpeed = 17}
-		else if(tmpAgi >= 150 && tmpAgi <= 199){tmpSpeed = 18}
-		else if(tmpAgi >= 200 && tmpAgi <= 254){tmpSpeed = 19}
-		else if(tmpAgi == 255){tmpSpeed = 20}
+		if(tmpAgi == 0){tmpSpeed = 1;}
+		else if(tmpAgi == 1){tmpSpeed = 2;}
+		else if(tmpAgi == 2){tmpSpeed = 3;}
+		else if(tmpAgi == 3 || tmpAgi == 4){tmpSpeed = 4;}
+		else if(tmpAgi >= 5 && tmpAgi <= 10){tmpSpeed = 5;}
+		else if(tmpAgi >= 11 && tmpAgi <= 14){tmpSpeed = 6;}
+		else if(tmpAgi >= 15 && tmpAgi <= 19){tmpSpeed = 7;}
+		else if(tmpAgi >= 20 && tmpAgi <= 24){tmpSpeed = 8;}
+		else if(tmpAgi >= 25 && tmpAgi <= 29){tmpSpeed = 9;}
+		else if(tmpAgi >= 30 && tmpAgi <= 39){tmpSpeed = 10;}
+		else if(tmpAgi >= 40 && tmpAgi <= 49){tmpSpeed = 11;}
+		else if(tmpAgi >= 50 && tmpAgi <= 59){tmpSpeed = 12;}
+		else if(tmpAgi >= 60 && tmpAgi <= 69){tmpSpeed = 13;}
+		else if(tmpAgi >= 70 && tmpAgi <= 79){tmpSpeed = 14;}
+		else if(tmpAgi >= 80 && tmpAgi <= 99){tmpSpeed = 15;}
+		else if(tmpAgi >= 100 && tmpAgi <= 124){tmpSpeed = 16;}
+		else if(tmpAgi >= 125 && tmpAgi <= 149){tmpSpeed = 17;}
+		else if(tmpAgi >= 150 && tmpAgi <= 199){tmpSpeed = 18;}
+		else if(tmpAgi >= 200 && tmpAgi <= 254){tmpSpeed = 19;}
+		else if(tmpAgi == 255){tmpSpeed = 20;}
+		
+		/* Skills */
+		/* First array is for available skills, second array is for mastered skills */
+		charArray[i][10] = [[],[]];
 		
 		/* Offense */
 		charArray[i][1] = 
@@ -92,7 +98,7 @@ function loadChar()
 			tmpSpeed,
 			0,
 			0
-		]
+		];
 		
 		/* Magic */
 		/* Not yet implemented */
@@ -110,13 +116,13 @@ function loadChar()
 			0.05,
 			1,
 			1
-		]
+		];
 	}
 }
 
 function applyXP(earnedXP)
 {
-	for(i = 0; i < charArray.length; i++)
+	for(var i = 0; i < charArray.length; i++)
 	{
 		if(charArray[i][0][1] > 0)
 		{
@@ -149,7 +155,7 @@ function levelUp(charNumber)
 
 function applyCP(earnedCP)
 {
-	for(i = 0; i < charArray.length; i++)
+	for(var i = 0; i < charArray.length; i++)
 	{
 		if(charArray[i][0][1] > 0)
 		{
@@ -165,7 +171,7 @@ function applyCP(earnedCP)
 
 function classUP(charNumber)
 {
-	var className;
+	var className = '';
 	
 	switch(charArray[charNumber][9][0])
 	{
@@ -181,10 +187,10 @@ function classUP(charNumber)
 function charUseItem(charTarget)
 {
 	var critPower = 1;
-	var tempNumber;
-	var tempCrit;
-	var tempCIP;
-	var tempTarget;
+	var tempNumber = 0;
+	var tempCrit = 1;
+	var tempCIP = 1;
+	var tempTarget = 1;
 	var targetArray;
 	
 	if(charTarget == true)

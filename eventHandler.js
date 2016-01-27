@@ -118,7 +118,7 @@ function battleKeyPress()
 					{
 						var posTest;
 						
-						for(i = 1; i < 6; i++)
+						for(var i = 1; i < 6; i++)
 						{
 							if(bPos[2]+i > 4)
 							{
@@ -166,7 +166,7 @@ function battleKeyPress()
 				{
 					var posTest;
 					
-					for(i = 1; i < 6; i++)
+					for(var i = 1; i < 6; i++)
 					{
 						if(bPos[2]-i < 0)
 						{
@@ -217,7 +217,7 @@ function battleKeyPress()
 				{
 					var posTest;
 					
-					for(i = 1; i < 6; i++)
+					for(var i = 1; i < 6; i++)
 					{
 						if(bPos[2]-i < 0)
 						{
@@ -279,7 +279,7 @@ function battleKeyPress()
 					{
 						var posTest;
 						
-						for(i = 1; i < 6; i++)
+						for(var i = 1; i < 6; i++)
 						{
 							if(bPos[2]+i > 4)
 							{
@@ -321,7 +321,7 @@ function battleKeyPress()
 				{
 					var posTest;
 					
-					for(i = 1; i < 6; i++)
+					for(var i = 1; i < 6; i++)
 					{
 						if(bPos[2]+i > 4)
 						{
@@ -368,7 +368,7 @@ function battleKeyPress()
 				{
 					var posTest;
 					
-					for(i = 1; i < 6; i++)
+					for(var i = 1; i < 6; i++)
 					{
 						if(bPos[2]+i > 4)
 						{
@@ -415,7 +415,7 @@ function battleKeyPress()
 			if(choosingItem == true)
 			{
 				choosingItem = false;
-				battleItemSelect = [0,0]
+				battleItemSelect = [0,0];
 			}
 			else if(choosingTarget == true)
 			{
