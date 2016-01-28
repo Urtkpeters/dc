@@ -22,13 +22,13 @@ function loadClasses()
 					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-					[0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-					[0,0,0,4,5,6,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,3,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,4,5,6,3,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 					[0,4,5,6,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 					[0,3,0,3,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-					[0,1,0,4,5,6,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,4,0,4,5,6,3,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 				]
 			]
@@ -52,6 +52,7 @@ function loadClasses()
 							2 = Claimed
 							3 = Occupying
 						*/
+						/*
 						if(k == 10 && l == 1 || k == 11 && l == 1)
 						{
 							classArray[i][j][k][l].push(1);
@@ -60,6 +61,9 @@ function loadClasses()
 						{
 							classArray[i][j][k][l].push(0);
 						}
+						*/
+						
+						classArray[i][j][k][l].push(0);
 					}
 					else if(classArray[i][j][k][l] == 1)
 					{
@@ -68,13 +72,15 @@ function loadClasses()
 					}
 				}
 			}
+			setClassPos(i,true,j);
+			gridDiscovery(i,j);
 		}
 	}
 }
 
 function classMoveCheck(moveDirection)
 {
-	var classNumber = getClassNumber();
+	var classNumber = getClassNumber(mPos[2],mPos[3]);
 	
 	switch(moveDirection)
 	{
@@ -125,12 +131,12 @@ function classMoveCheck(moveDirection)
 	}
 }
 
-function getClassNumber()
+function getClassNumber(classNumber, classNumber2)
 {
 	var classNumber = 0;
 	
 	/* Add else ifs for other classes */
-	if(mPos[2] == 0 && mPos[3] == 0)
+	if(classNumber == 0 && classNumber2 == 0)
 	{
 		classNumber = 0;
 	}
@@ -138,13 +144,18 @@ function getClassNumber()
 	return classNumber;
 }
 
-function setClassPos()
+function setClassPos(charNumber, haveClassNumber, classNumber, classNumber2)
 {
-	for(var i = 0; i < classArray[mPos[2]][getClassNumber()].length; i++)
+	if(haveClassNumber == false)
 	{
-		for(var j = 0; j < classArray[mPos[2]][getClassNumber()][i].length; j++)
+		classNumber = getClassNumber(classNumber,classNumber2);
+	}
+	
+	for(var i = 0; i < classArray[charNumber][classNumber].length; i++)
+	{
+		for(var j = 0; j < classArray[charNumber][classNumber][i].length; j++)
 		{
-			if(classArray[mPos[2]][getClassNumber()][i][j][8] == 3)
+			if(classArray[charNumber][classNumber][i][j][8] == 3)
 			{
 				startMenuMovePos[0] = j;
 				startMenuMovePos[1] = i;
@@ -189,7 +200,7 @@ function loadNodeArray()
 function activateNode()
 {
 	var canMove = false;
-	var classNumber = getClassNumber();
+	var classNumber = getClassNumber(mPos[2],mPos[3]);
 	
 	/* Makes sure you are only selecting one square away */
 	if(classGridPos[0] - startMenuMovePos[0] == 1 && classGridPos[1] - startMenuMovePos[1] == 0 || classGridPos[0] - startMenuMovePos[0] == -1 && classGridPos[1] - startMenuMovePos[1] == 0)
@@ -204,10 +215,11 @@ function activateNode()
 	if(canMove == true)
 	{
 		/* Check to see if you have available CP and the skill is unlocked */
-		if(charArray[mPos[5]][9][(getClassNumber()+1)*3] > 0 && classArray[mPos[5]][getClassNumber()][startMenuMovePos[1]][startMenuMovePos[0]][8] == 0)
+		if(charArray[mPos[5]][9][(classNumber+1)*3] > 0 && classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][8] == 1)
 		{
 			/* Set previously occupied node to unlocked */
 			classArray[mPos[5]][classNumber][classGridPos[1]][classGridPos[0]][8] = 2;
+			
 			/* Remove one level */
 			charArray[mPos[5]][9][(classNumber+1)*3] -= 1;
 			
@@ -227,7 +239,7 @@ function activateNode()
 				charArray[mPos[5]][6][classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][5]-1] += classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][6];
 			}
 			
-			/* Apply Skill */
+			/* Apply Skill */ 
 			if(classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][7] != 0)
 			{
 				charArray[mPos[5]][10][0].push(classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][7]-1);
@@ -239,10 +251,14 @@ function activateNode()
 			/* Set new position */
 			classGridPos[0] = startMenuMovePos[0];
 			classGridPos[1] = startMenuMovePos[1];
+			
+			/* Calculate position and reveal needed nodes */ 
+			gridDiscovery(mPos[5], classNumber);
+			
 			appendOutput('Unlocked!');
 		}
 		/* Otherwise checks to see if it is already unlocked and available to be moved through */
-		else if(charArray[mPos[5]][9][(getClassNumber()+1)*3] > 0 && classArray[mPos[5]][getClassNumber()][startMenuMovePos[1]][startMenuMovePos[0]][8] == 1)
+		else if(charArray[mPos[5]][9][(classNumber+1)*3] > 0 && classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][8] == 1 || charArray[mPos[5]][9][(classNumber+1)*3] > 0 && classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][8] == 2)
 		{
 			classArray[mPos[5]][classNumber][classGridPos[1]][classGridPos[0]][8] = 2;
 			charArray[mPos[5]][9][(classNumber+1)*3] -= 1;
@@ -259,5 +275,90 @@ function activateNode()
 	else
 	{
 		appendOutput("Can't move there!");
+	}
+}
+
+function gridDiscovery(charNumber, classNumber)
+{
+	var xPlus = 0;
+	var yPlus = 0;
+	var xPlus2 = 0;
+	var yPlus2 = 0;
+	var consoleVar = '';
+	var consoleVar2 = '';
+	for(var i = 0; i < 4; i++)
+	{
+		switch(i)
+		{
+			/* North */
+			case 0:
+				xPlus = 0;
+				yPlus = -1;
+				consoleVar = 'North1';
+				break;
+			/* East */
+			case 1:
+				xPlus = 1;
+				yPlus = 0;
+				consoleVar = 'East1';
+				break;
+			/* South */
+			case 2:
+				xPlus = 0;
+				yPlus = 1;
+				consoleVar = 'South1';
+				break;
+			/* West */
+			case 3: 
+				xPlus = -1;
+				yPlus = 0;
+				consoleVar = 'West1';
+				break;
+		}
+		
+		if(classArray[charNumber][classNumber][classGridPos[1]+yPlus][classGridPos[0]+xPlus] != 0)
+		{
+			if(classArray[charNumber][classNumber][classGridPos[1]+yPlus][classGridPos[0]+xPlus][8] == 0)
+			{
+				classArray[charNumber][classNumber][classGridPos[1]+yPlus][classGridPos[0]+xPlus][8] = 1;
+			}
+			console.log(consoleVar);
+			for(var j = 0; j < 4; j++)
+			{
+				switch(j)
+				{
+					/* North */
+					case 0:
+						xPlus2 = 0;
+						yPlus2 = -1;
+						consoleVar2 = 'North2';
+						break;
+					/* East */
+					case 1:
+						xPlus2 = 1;
+						yPlus2 = 0;
+						consoleVar2 = 'East2';
+						break;
+					/* South */
+					case 2:
+						xPlus2 = 0;
+						yPlus2 = 1;
+						consoleVar2 = 'South2';
+						break;
+					/* West */
+					case 3: 
+						xPlus2 = -1;
+						yPlus2 = 0;
+						consoleVar2 = 'West2';
+						break;
+				}
+				
+				if(classArray[charNumber][classNumber][classGridPos[1]+yPlus+yPlus2][classGridPos[0]+xPlus+xPlus2][8] == 0)
+				{
+					console.log(consoleVar2);
+					classArray[charNumber][classNumber][classGridPos[1]+yPlus+yPlus2][classGridPos[0]+xPlus+xPlus2][8] = 1;
+				}
+			}
+		}
 	}
 }

@@ -555,7 +555,6 @@ function buildTopMenus()
 		}
 		
 		cContext.strokeStyle = "#FFFFFF";
-		cContext.font = "14px Arial";
 		
 		cContext.beginPath();
 		cContext.moveTo(100+xPlus, 4);
@@ -571,6 +570,8 @@ function buildTopMenus()
 		cContext.stroke();
 		cContext.closePath();
 		
+		cContext.textAlign="left";
+		cContext.font = "14px Arial";
 		cContext.fillStyle = "#FFFFFF";
 		cContext.fillText(charArray[i][0][0],100+xPlus,18);
 		cContext.fillText("HP: " + charArray[i][0][1] + " / " + charArray[i][0][2],100+xPlus,33);
@@ -633,6 +634,7 @@ function buildCommandMenus()
 		/* Text */
 		cContext.fillStyle = "#FFFFFF";
 		cContext.font = "18px Arial";
+		cContext.textAlign="left";
 		
 		cContext.fillText("Attack",290,466.5);
 		cContext.fillText("Skills",390,466.5);
@@ -652,22 +654,7 @@ function buildCommandMenus()
 		cContext.closePath();
 	}
 }
-/* Depricated... delete if nothing goes wrong
-function buildBlankMenu()
-{
-		Bottom Black Window
-	cContext.beginPath();
-	cContext.fillStyle = "#000000";
-	cContext.moveTo(0,425);
-	cContext.lineTo(1000,425);
-	cContext.lineTo(1000,500);
-	cContext.lineTo(0,500);
-	cContext.lineTo(0,425);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
-}
-*/
+
 function buildMonster()
 {
 	var enemyImage = [];
@@ -1832,20 +1819,6 @@ function buildStatusMenu()
 		cContext.lineTo(190,405);
 		cContext.lineTo(190,125);
 		cContext.fill();
-		/* Vertical Lines */
-		for(var i = 0; i < 30; i++)
-		{
-			cContext.moveTo(200+(20*i),125);
-			cContext.lineTo(200+(20*i),405);
-		}
-		/* Horizontal Lines */
-		for(var i = 0; i < 14; i++)
-		{
-			cContext.moveTo(190,135+(20*i));
-			cContext.lineTo(790,135+(20*i));
-		}
-		cContext.strokeStyle = '#000000';
-		cContext.stroke();
 		cContext.closePath();
 		
 		/* Yellow background box for selection box */

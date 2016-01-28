@@ -927,7 +927,7 @@ function startMenuKeyPress()
 					}
 					else if(menuState == 1)
 					{
-						setClassPos();
+						setClassPos(mPos[5],'false',mPos[2],mPos[3]);
 						menuState = 2;
 					}
 					else if(menuState == 2)
