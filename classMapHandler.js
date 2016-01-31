@@ -284,8 +284,6 @@ function gridDiscovery(charNumber, classNumber)
 	var yPlus = 0;
 	var xPlus2 = 0;
 	var yPlus2 = 0;
-	var consoleVar = '';
-	var consoleVar2 = '';
 	for(var i = 0; i < 4; i++)
 	{
 		switch(i)
@@ -294,25 +292,21 @@ function gridDiscovery(charNumber, classNumber)
 			case 0:
 				xPlus = 0;
 				yPlus = -1;
-				consoleVar = 'North1';
 				break;
 			/* East */
 			case 1:
 				xPlus = 1;
 				yPlus = 0;
-				consoleVar = 'East1';
 				break;
 			/* South */
 			case 2:
 				xPlus = 0;
 				yPlus = 1;
-				consoleVar = 'South1';
 				break;
 			/* West */
 			case 3: 
 				xPlus = -1;
 				yPlus = 0;
-				consoleVar = 'West1';
 				break;
 		}
 		
@@ -322,7 +316,6 @@ function gridDiscovery(charNumber, classNumber)
 			{
 				classArray[charNumber][classNumber][classGridPos[1]+yPlus][classGridPos[0]+xPlus][8] = 1;
 			}
-			console.log(consoleVar);
 			for(var j = 0; j < 4; j++)
 			{
 				switch(j)
@@ -331,31 +324,26 @@ function gridDiscovery(charNumber, classNumber)
 					case 0:
 						xPlus2 = 0;
 						yPlus2 = -1;
-						consoleVar2 = 'North2';
 						break;
 					/* East */
 					case 1:
 						xPlus2 = 1;
 						yPlus2 = 0;
-						consoleVar2 = 'East2';
 						break;
 					/* South */
 					case 2:
 						xPlus2 = 0;
 						yPlus2 = 1;
-						consoleVar2 = 'South2';
 						break;
 					/* West */
 					case 3: 
 						xPlus2 = -1;
 						yPlus2 = 0;
-						consoleVar2 = 'West2';
 						break;
 				}
 				
 				if(classArray[charNumber][classNumber][classGridPos[1]+yPlus+yPlus2][classGridPos[0]+xPlus+xPlus2][8] == 0)
 				{
-					console.log(consoleVar2);
 					classArray[charNumber][classNumber][classGridPos[1]+yPlus+yPlus2][classGridPos[0]+xPlus+xPlus2][8] = 1;
 				}
 			}

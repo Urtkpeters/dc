@@ -1740,28 +1740,29 @@ function buildStatusMenu()
 	if(menuState == 1)
 	{
 		cContext.fillStyle = "#FFFFFF";
+		cContext.textAlign="center";
+		
 		cContext.font = "20px Arial";
-		
-		cContext.fillText('Blade',220,110);
-		cContext.fillText('Blunt',380,110);
-		cContext.fillText('Pierce',540,110);
-		cContext.fillText('Focus',700,110);
-		
+		cContext.fillText('Blade',246,110);
+		cContext.fillText('Blunt',402,110);
+		cContext.fillText('Pierce',570,110);
+		cContext.fillText('Focus',726,110);
+		cContext.textAlign="left";
 		cContext.font = "16px Arial";
-		cContext.fillText('Squire',222,135);
-		cContext.fillText('Knight',221,205);
-		cContext.fillText('Berserker',214,275);
-		cContext.fillText('Blademaster',207,345);
+		cContext.fillText('Squire',246,135);
+		cContext.fillText('Knight',246,205);
+		cContext.fillText('Berserker',246,275);
+		cContext.fillText('Blademaster',246,345);
 		
-		cContext.fillText('Cleric',382,135);
-		cContext.fillText('Paladin',378,205);
-		cContext.fillText('Crusader',373,275);
-		cContext.fillText('Priest',382,345);
+		cContext.fillText('Cleric',402,135);
+		cContext.fillText('Paladin',402,205);
+		cContext.fillText('Crusader',402,275);
+		cContext.fillText('Priest',402,345);
 		
-		cContext.fillText('Thief',550,135);
-		cContext.fillText('Bard',551,205);
-		cContext.fillText('Ninja',550,275);
-		cContext.fillText('Dragoon',540,345);
+		cContext.fillText('Thief',570,135);
+		cContext.fillText('Bard',570,205);
+		cContext.fillText('Ninja',570,275);
+		cContext.fillText('Dragoon',570,345);
 		
 		cContext.fillText('Mage',708,135);
 		cContext.fillText('Warlock',701,205);
