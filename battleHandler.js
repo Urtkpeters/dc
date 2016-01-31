@@ -23,7 +23,6 @@ function encounter()
 		
 		getBattleEnemies();
 		buildAttackOrder();
-		buildCanvas();
 		battlePause();
 	}
 }
@@ -125,7 +124,6 @@ function attack(attackerNumber, targetNumber)
 		buildAttackOrder();
 		battlePause();
 	}
-	buildCanvas();
 }
 
 function buildAttackOrder()
@@ -242,7 +240,6 @@ function battleEnd(run)
 	beArray = [];
 	numOfEnemies = [];
 	inCombat = false;
-	buildCanvas();
 }
 
 function battlePause()

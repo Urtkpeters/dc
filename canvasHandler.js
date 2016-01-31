@@ -6,33 +6,25 @@ function buildCanvas()
 		buildMonster();
 		buildMenuBackgrounds();
 		buildTopMenus();
-		
-		/* Wait for the monster images to load */
-		setTimeout
-		(
-			function()
+		if(attackOrderArray[0] == 0 || attackOrderArray[0] == 1 || attackOrderArray[0] == 2)
+		{
+			buildCommandMenus();
+			/* Selecting Char Target */
+			if(bPos[3] == 0 && choosingTarget == true)
 			{
-				if(attackOrderArray[0] == 0 || attackOrderArray[0] == 1 || attackOrderArray[0] == 2)
-				{
-					buildCommandMenus();
-					/* Selecting Char Target */
-					if(bPos[3] == 0 && choosingTarget == true)
-					{
-						buildCharTargetSelect();
-					}
-					/* Selecting Enemy Target */
-					else if(bPos[3] == 1 && choosingTarget == true)
-					{
-						buildEnemyTargetSelect();
-					}
-					/* Selecting Item */
-					else if(bPos[1] == 2 && choosingItem == true)
-					{
-						buildBattleItemSelect();
-					}
-				}
+				buildCharTargetSelect();
 			}
-		, 10);
+			/* Selecting Enemy Target */
+			else if(bPos[3] == 1 && choosingTarget == true)
+			{
+				buildEnemyTargetSelect();
+			}
+			/* Selecting Item */
+			else if(bPos[1] == 2 && choosingItem == true)
+			{
+				buildBattleItemSelect();
+			}
+		}
 	}
 	else if(menuOpen == true)
 	{
@@ -585,12 +577,7 @@ function buildCommandMenus()
 	var selectionX = 0;
 	
 	/* Character Portrait */
-	var charImage = new Image();
-	charImage.src = charArray[attackOrderArray[0]][0][8];
-	charImage.onload = function()
-	{
-		cContext.drawImage(charImage, 175, 425, 75, 75);
-	};
+	cContext.drawImage(charArray[attackOrderArray[0]][0][8], 175, 425, 75, 75);
 	
 	/* Bottom Text Menu */
 	/* Base Menu */
@@ -666,140 +653,80 @@ function buildMonster()
 	switch(numOfEnemies.length)
 	{
 		case 1:
-			enemyImage[0].src = beArray[0][0][10];
-			enemyImage[0].onload = function()
-			{
-				cContext.drawImage(enemyImage[0], 450, 310, 100, 100);
-			};
+			cContext.drawImage(beArray[0][0][10], 450, 310, 100, 100);
 			break;
 		case 2:
 			if(numOfEnemies[0] == 1)
 			{
-				enemyImage[0].src = beArray[0][0][10];
-				enemyImage[0].onload = function()
-				{
-					cContext.drawImage(enemyImage[0], 283, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[0][0][10], 283, 310, 100, 100);
 			}
 			
 			if(numOfEnemies[1] == 1)
 			{
-				enemyImage[1].src = beArray[1][0][10];
-				enemyImage[1].onload = function()
-				{
-					cContext.drawImage(enemyImage[1], 616, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[1][0][10], 616, 310, 100, 100);
 			}
 			break;
 		case 3:
 			if(numOfEnemies[0] == 1)
 			{
-				enemyImage[0].src = beArray[0][0][10];
-				enemyImage[0].onload = function()
-				{
-					cContext.drawImage(enemyImage[0], 200, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[0][0][10], 200, 310, 100, 100);
 			}
 			
 			if(numOfEnemies[1] == 1)
 			{
-				enemyImage[1].src = beArray[1][0][10];
-				enemyImage[1].onload = function()
-				{
-					cContext.drawImage(enemyImage[1], 450, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[1][0][10], 450, 310, 100, 100);
 			}
 			
 			if(numOfEnemies[2] == 1)
 			{
-				enemyImage[2].src = beArray[2][0][10];
-				enemyImage[2].onload = function()
-				{
-					cContext.drawImage(enemyImage[2], 700, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[2][0][10], 700, 310, 100, 100);
 			}
 			break;
 		case 4:
 			if(numOfEnemies[1] == 1)
 			{
-				enemyImage[1].src = beArray[1][0][10];
-				enemyImage[1].onload = function()
-				{
-					cContext.drawImage(enemyImage[1], 365, 260, 100, 100);
-				};
+				cContext.drawImage(beArray[1][0][10], 365, 260, 100, 100);
 			}
 			
 			if(numOfEnemies[2] == 1)
 			{
-				enemyImage[2].src = beArray[2][0][10];
-				enemyImage[2].onload = function()
-				{
-					cContext.drawImage(enemyImage[2], 535, 260, 100, 100);
-				};
+				cContext.drawImage(beArray[2][0][10], 535, 260, 100, 100);
 			}
 			
 			if(numOfEnemies[0] == 1)
 			{
-				enemyImage[0].src = beArray[0][0][10];
-				enemyImage[0].onload = function()
-				{
-					cContext.drawImage(enemyImage[0], 200, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[0][0][10], 200, 310, 100, 100);
 			}
 			
 			if(numOfEnemies[3] == 1)
 			{
-				enemyImage[3].src = beArray[3][0][10];
-				enemyImage[3].onload = function()
-				{
-					cContext.drawImage(enemyImage[3], 700, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[3][0][10], 700, 310, 100, 100);
 			}
 			break;
 		case 5:
 			if(numOfEnemies[1] == 1)
 			{
-				enemyImage[1].src = beArray[1][0][10];
-				enemyImage[1].onload = function()
-				{
-					cContext.drawImage(enemyImage[1], 325, 260, 100, 100);
-				};
+				cContext.drawImage(beArray[1][0][10], 325, 260, 100, 100);
 			}
 			
 			if(numOfEnemies[3] == 1)
 			{
-				enemyImage[3].src = beArray[3][0][10];
-				enemyImage[3].onload = function()
-				{
-					cContext.drawImage(enemyImage[3], 575, 260, 100, 100);
-				};
+				cContext.drawImage(beArray[3][0][10], 575, 260, 100, 100);
 			}
 			
 			if(numOfEnemies[0] == 1)
 			{
-				enemyImage[0].src = beArray[0][0][10];
-				enemyImage[0].onload = function()
-				{
-					cContext.drawImage(enemyImage[0], 200, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[0][0][10], 200, 310, 100, 100);
 			}
 			
 			if(numOfEnemies[2] == 1)
 			{
-				enemyImage[2].src = beArray[2][0][10];
-				enemyImage[2].onload = function()
-				{
-					cContext.drawImage(enemyImage[2], 450, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[2][0][10], 450, 310, 100, 100);
 			}
 			
 			if(numOfEnemies[4] == 1)
 			{
-				enemyImage[4].src = beArray[4][0][10];
-				enemyImage[4].onload = function()
-				{
-					cContext.drawImage(enemyImage[4], 700, 310, 100, 100);
-				};
+				cContext.drawImage(beArray[4][0][10], 700, 310, 100, 100);
 			}
 			break;
 	}
@@ -1045,7 +972,7 @@ function buildStartMenu()
 	cContext.fillText("Skills",370,466.5);
 	cContext.fillText("Equipment",455,466.5);
 	cContext.fillText("Status",580,466.5);
-	cContext.fillText("Class",662,466.5);
+	cContext.fillText("Save",662,466.5);
 	
 	/* Selection Arrow */
 	if(mPos[1] == 0)
@@ -1100,239 +1027,59 @@ function buildSubMenus()
 function buildItemMenu()
 {
 	var itemImages = [];
-	var loadImages = [];
 	var itemNames = [];
 	for(var i = 0; i < 3; i++)
 	{
 		itemImages.push([]);
-		loadImages.push([]);
 		itemNames.push([]);
 		for(var j = 0; j < 12; j++)
 		{
 			itemImages[i].push(itemArray[charArray[i][8][j]][8]);
-			loadImages[i].push(new Image());
 			itemNames[i].push(itemArray[charArray[i][8][j]][0]);
 		}
 	}
 	
 	/* Character 1 */
-	loadImages[0][0].src = itemImages[0][0];
-	loadImages[0][0].onload = function()
-	{
-		cContext.drawImage(loadImages[0][0], 180, 100, 40, 40);
-	};
-	
-	loadImages[0][1].src = itemImages[0][1];
-	loadImages[0][1].onload = function()
-	{
-		cContext.drawImage(loadImages[0][1], 247, 100, 40, 40);
-	};
-	
-	loadImages[0][2].src = itemImages[0][2];
-	loadImages[0][2].onload = function()
-	{
-		cContext.drawImage(loadImages[0][2], 180, 150, 40, 40);
-	};
-	
-	loadImages[0][3].src = itemImages[0][3];
-	loadImages[0][3].onload = function()
-	{
-		cContext.drawImage(loadImages[0][3], 247, 150, 40, 40);
-	};
-	
-	loadImages[0][4].src = itemImages[0][4];
-	loadImages[0][4].onload = function()
-	{
-		cContext.drawImage(loadImages[0][4], 180, 200, 40, 40);
-	};
-	
-	loadImages[0][5].src = itemImages[0][5];
-	loadImages[0][5].onload = function()
-	{
-		cContext.drawImage(loadImages[0][5], 247, 200, 40, 40);
-	};
-	
-	loadImages[0][6].src = itemImages[0][6];
-	loadImages[0][6].onload = function()
-	{
-		cContext.drawImage(loadImages[0][6], 180, 250, 40, 40);
-	};
-	
-	loadImages[0][7].src = itemImages[0][7];
-	loadImages[0][7].onload = function()
-	{
-		cContext.drawImage(loadImages[0][7], 247, 250, 40, 40);
-	};
-	
-	loadImages[0][8].src = itemImages[0][8];
-	loadImages[0][8].onload = function()
-	{
-		cContext.drawImage(loadImages[0][8], 180, 300, 40, 40);
-	};
-	
-	loadImages[0][9].src = itemImages[0][9];
-	loadImages[0][9].onload = function()
-	{
-		cContext.drawImage(loadImages[0][9], 247, 300, 40, 40);
-	};
-	
-	loadImages[0][10].src = itemImages[0][10];
-	loadImages[0][10].onload = function()
-	{
-		cContext.drawImage(loadImages[0][10], 180, 350, 40, 40);
-	};
-	
-	loadImages[0][11].src = itemImages[0][11];
-	loadImages[0][11].onload = function()
-	{
-		cContext.drawImage(loadImages[0][11], 247, 350, 40, 40);
-	};
+	cContext.drawImage(itemImages[0][0], 180, 100, 40, 40);
+	cContext.drawImage(itemImages[0][1], 247, 100, 40, 40);
+	cContext.drawImage(itemImages[0][2], 180, 150, 40, 40);
+	cContext.drawImage(itemImages[0][3], 247, 150, 40, 40);
+	cContext.drawImage(itemImages[0][4], 180, 200, 40, 40);
+	cContext.drawImage(itemImages[0][5], 247, 200, 40, 40);
+	cContext.drawImage(itemImages[0][6], 180, 250, 40, 40);
+	cContext.drawImage(itemImages[0][7], 247, 250, 40, 40);
+	cContext.drawImage(itemImages[0][8], 180, 300, 40, 40);
+	cContext.drawImage(itemImages[0][9], 247, 300, 40, 40);
+	cContext.drawImage(itemImages[0][10], 180, 350, 40, 40);
+	cContext.drawImage(itemImages[0][11], 247, 350, 40, 40);
 	
 	/* Character 2 */
-	loadImages[1][0].src = itemImages[1][0];
-	loadImages[1][0].onload = function()
-	{
-		cContext.drawImage(loadImages[1][0], 435, 100, 40, 40);
-	};
-	
-	loadImages[1][1].src = itemImages[1][1];
-	loadImages[1][1].onload = function()
-	{
-		cContext.drawImage(loadImages[1][1], 502, 100, 40, 40);
-	};
-	
-	loadImages[1][2].src = itemImages[1][2];
-	loadImages[1][2].onload = function()
-	{
-		cContext.drawImage(loadImages[1][2], 435, 150, 40, 40);
-	};
-	
-	loadImages[1][3].src = itemImages[1][3];
-	loadImages[1][3].onload = function()
-	{
-		cContext.drawImage(loadImages[1][3], 502, 150, 40, 40);
-	};
-	
-	loadImages[1][4].src = itemImages[1][4];
-	loadImages[1][4].onload = function()
-	{
-		cContext.drawImage(loadImages[1][4], 435, 200, 40, 40);
-	};
-	
-	loadImages[1][5].src = itemImages[1][5];
-	loadImages[1][5].onload = function()
-	{
-		cContext.drawImage(loadImages[1][5], 502, 200, 40, 40);
-	};
-	
-	loadImages[1][6].src = itemImages[1][6];
-	loadImages[1][6].onload = function()
-	{
-		cContext.drawImage(loadImages[1][6], 435, 250, 40, 40);
-	};
-	
-	loadImages[1][7].src = itemImages[1][7];
-	loadImages[1][7].onload = function()
-	{
-		cContext.drawImage(loadImages[1][7], 502, 250, 40, 40);
-	};
-	
-	loadImages[1][8].src = itemImages[1][8];
-	loadImages[1][8].onload = function()
-	{
-		cContext.drawImage(loadImages[1][8], 435, 300, 40, 40);
-	};
-	
-	loadImages[1][9].src = itemImages[1][9];
-	loadImages[1][9].onload = function()
-	{
-		cContext.drawImage(loadImages[1][9], 502, 300, 40, 40);
-	};
-	
-	loadImages[1][10].src = itemImages[1][10];
-	loadImages[1][10].onload = function()
-	{
-		cContext.drawImage(loadImages[1][10], 435, 350, 40, 40);
-	};
-	
-	loadImages[1][11].src = itemImages[1][11];
-	loadImages[1][11].onload = function()
-	{
-		cContext.drawImage(loadImages[1][11], 502, 350, 40, 40);
-	};
+	cContext.drawImage(itemImages[1][0], 435, 100, 40, 40);
+	cContext.drawImage(itemImages[1][1], 502, 100, 40, 40);
+	cContext.drawImage(itemImages[1][2], 435, 150, 40, 40);
+	cContext.drawImage(itemImages[1][3], 502, 150, 40, 40);
+	cContext.drawImage(itemImages[1][4], 435, 200, 40, 40);
+	cContext.drawImage(itemImages[1][5], 502, 200, 40, 40);
+	cContext.drawImage(itemImages[1][6], 435, 250, 40, 40);
+	cContext.drawImage(itemImages[1][7], 502, 250, 40, 40);
+	cContext.drawImage(itemImages[1][8], 435, 300, 40, 40);
+	cContext.drawImage(itemImages[1][9], 502, 300, 40, 40);
+	cContext.drawImage(itemImages[1][10], 435, 350, 40, 40);
+	cContext.drawImage(itemImages[1][11], 502, 350, 40, 40);
 	
 	/* Character 3 */
-	loadImages[2][0].src = itemImages[2][0];
-	loadImages[2][0].onload = function()
-	{
-		cContext.drawImage(loadImages[2][0], 690, 100, 40, 40);
-	};
-	
-	loadImages[2][1].src = itemImages[2][1];
-	loadImages[2][1].onload = function()
-	{
-		cContext.drawImage(loadImages[2][1], 757, 100, 40, 40);
-	};
-	
-	loadImages[2][2].src = itemImages[2][2];
-	loadImages[2][2].onload = function()
-	{
-		cContext.drawImage(loadImages[2][2], 690, 150, 40, 40);
-	};
-	
-	loadImages[2][3].src = itemImages[2][3];
-	loadImages[2][3].onload = function()
-	{
-		cContext.drawImage(loadImages[2][3], 757, 150, 40, 40);
-	};
-	
-	loadImages[2][4].src = itemImages[2][4];
-	loadImages[2][4].onload = function()
-	{
-		cContext.drawImage(loadImages[2][4], 690, 200, 40, 40);
-	};
-	
-	loadImages[2][5].src = itemImages[2][5];
-	loadImages[2][5].onload = function()
-	{
-		cContext.drawImage(loadImages[2][5], 757, 200, 40, 40);
-	};
-	
-	loadImages[2][6].src = itemImages[2][6];
-	loadImages[2][6].onload = function()
-	{
-		cContext.drawImage(loadImages[2][6], 690, 250, 40, 40);
-	};
-	
-	loadImages[2][7].src = itemImages[2][7];
-	loadImages[2][7].onload = function()
-	{
-		cContext.drawImage(loadImages[2][7], 757, 250, 40, 40);
-	};
-	
-	loadImages[2][8].src = itemImages[2][8];
-	loadImages[2][8].onload = function()
-	{
-		cContext.drawImage(loadImages[2][8], 690, 300, 40, 40);
-	};
-	
-	loadImages[2][9].src = itemImages[2][9];
-	loadImages[2][9].onload = function()
-	{
-		cContext.drawImage(loadImages[2][9], 757, 300, 40, 40);
-	};
-	
-	loadImages[2][10].src = itemImages[2][10];
-	loadImages[2][10].onload = function()
-	{
-		cContext.drawImage(loadImages[2][10], 690, 350, 40, 40);
-	};
-	
-	loadImages[2][11].src = itemImages[2][11];
-	loadImages[2][11].onload = function()
-	{
-		cContext.drawImage(loadImages[2][11], 757, 350, 40, 40);
-	};
+	cContext.drawImage(itemImages[2][0], 690, 100, 40, 40);
+	cContext.drawImage(itemImages[2][1], 757, 100, 40, 40);
+	cContext.drawImage(itemImages[2][2], 690, 150, 40, 40);
+	cContext.drawImage(itemImages[2][3], 757, 150, 40, 40);
+	cContext.drawImage(itemImages[2][4], 690, 200, 40, 40);
+	cContext.drawImage(itemImages[2][5], 757, 200, 40, 40);
+	cContext.drawImage(itemImages[2][6], 690, 250, 40, 40);
+	cContext.drawImage(itemImages[2][7], 757, 250, 40, 40);
+	cContext.drawImage(itemImages[2][8], 690, 300, 40, 40);
+	cContext.drawImage(itemImages[2][9], 757, 300, 40, 40);
+	cContext.drawImage(itemImages[2][10], 690, 350, 40, 40);
+	cContext.drawImage(itemImages[2][11], 757, 350, 40, 40);
 	
 	var columnX = 0;
 	
@@ -1505,88 +1252,13 @@ function buildBattleItemSelect()
 {
 	var xPlus = (attackOrderArray[0] * 255);
 	var itemImages = [];
-	var loadImages = [];
 	var itemNames = [];
 	
 	for(var i = 0; i < 12; i++)
 	{
-		itemImages.push(itemArray[charArray[attackOrderArray[0]][8][i]][8]);
-		loadImages.push(new Image());
+		itemImages.push(itemArray[charArray[attackOrde1rArray[0]][8][i]][8]);
 		itemNames.push(itemArray[charArray[attackOrderArray[0]][8][i]][0]);
 	}
-	
-	/* Character 1 */
-	loadImages[0].src = itemImages[0];
-	loadImages[0].onload = function()
-	{
-		cContext.drawImage(loadImages[0], 180+xPlus, 100, 40, 40);
-	};
-	
-	loadImages[1].src = itemImages[1];
-	loadImages[1].onload = function()
-	{
-		cContext.drawImage(loadImages[1], 247+xPlus, 100, 40, 40);
-	};
-	
-	loadImages[2].src = itemImages[2];
-	loadImages[2].onload = function()
-	{
-		cContext.drawImage(loadImages[2], 180+xPlus, 150, 40, 40);
-	};
-	
-	loadImages[3].src = itemImages[3];
-	loadImages[3].onload = function()
-	{
-		cContext.drawImage(loadImages[3], 247+xPlus, 150, 40, 40);
-	};
-	
-	loadImages[4].src = itemImages[4];
-	loadImages[4].onload = function()
-	{
-		cContext.drawImage(loadImages[4], 180+xPlus, 200, 40, 40);
-	};
-	
-	loadImages[5].src = itemImages[5];
-	loadImages[5].onload = function()
-	{
-		cContext.drawImage(loadImages[5], 247+xPlus, 200, 40, 40);
-	};
-	
-	loadImages[6].src = itemImages[6];
-	loadImages[6].onload = function()
-	{
-		cContext.drawImage(loadImages[6], 180+xPlus, 250, 40, 40);
-	};
-	
-	loadImages[7].src = itemImages[7];
-	loadImages[7].onload = function()
-	{
-		cContext.drawImage(loadImages[7], 247+xPlus, 250, 40, 40);
-	};
-	
-	loadImages[8].src = itemImages[8];
-	loadImages[8].onload = function()
-	{
-		cContext.drawImage(loadImages[8], 180+xPlus, 300, 40, 40);
-	};
-	
-	loadImages[9].src = itemImages[9];
-	loadImages[9].onload = function()
-	{
-		cContext.drawImage(loadImages[9], 247+xPlus, 300, 40, 40);
-	};
-	
-	loadImages[10].src = itemImages[10];
-	loadImages[10].onload = function()
-	{
-		cContext.drawImage(loadImages[10], 180+xPlus, 350, 40, 40);
-	};
-	
-	loadImages[11].src = itemImages[11];
-	loadImages[11].onload = function()
-	{
-		cContext.drawImage(loadImages[11], 247+xPlus, 350, 40, 40);
-	};
 	
 	/* Background and Border */
 	cContext.strokeStyle = "#FFFFFF";
@@ -1604,6 +1276,19 @@ function buildBattleItemSelect()
 	cContext.fill();
 	cContext.stroke();
 	cContext.closePath();
+	
+	cContext.drawImage(itemImages[0], 180+xPlus, 100, 40, 40);
+	cContext.drawImage(itemImages[1], 247+xPlus, 100, 40, 40);
+	cContext.drawImage(itemImages[2], 180+xPlus, 150, 40, 40);
+	cContext.drawImage(itemImages[3], 247+xPlus, 150, 40, 40);
+	cContext.drawImage(itemImages[4], 180+xPlus, 200, 40, 40);
+	cContext.drawImage(itemImages[5], 247+xPlus, 200, 40, 40);
+	cContext.drawImage(itemImages[6], 180+xPlus, 250, 40, 40);
+	cContext.drawImage(itemImages[7], 247+xPlus, 250, 40, 40);
+	cContext.drawImage(itemImages[8], 180+xPlus, 300, 40, 40);
+	cContext.drawImage(itemImages[9], 247+xPlus, 300, 40, 40);
+	cContext.drawImage(itemImages[10], 180+xPlus, 350, 40, 40);
+	cContext.drawImage(itemImages[11], 247+xPlus, 350, 40, 40);
 	
 	var columnX = 0;
 	
@@ -1746,8 +1431,8 @@ function buildStatusMenu()
 		cContext.fillText('Blade',246,110);
 		cContext.fillText('Blunt',402,110);
 		cContext.fillText('Pierce',570,110);
-		cContext.fillText('Focus',726,110);
-		cContext.textAlign="left";
+		cContext.fillText('Focus',727,110);
+		
 		cContext.font = "16px Arial";
 		cContext.fillText('Squire',246,135);
 		cContext.fillText('Knight',246,205);
@@ -1764,31 +1449,31 @@ function buildStatusMenu()
 		cContext.fillText('Ninja',570,275);
 		cContext.fillText('Dragoon',570,345);
 		
-		cContext.fillText('Mage',708,135);
-		cContext.fillText('Warlock',701,205);
-		cContext.fillText('Sorcerer',700,275);
-		cContext.fillText('Enchanter',698,345);
+		cContext.fillText('Mage',727,135);
+		cContext.fillText('Warlock',727,205);
+		cContext.fillText('Sorcerer',727,275);
+		cContext.fillText('Enchanter',727,345);
 		
 		cContext.font = "12px Arial";
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][3],224,151);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][6],224,221);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][9],224,291);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][12],224,361);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][3],246,151);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][6],246,221);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][9],246,291);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][12],246,361);
 		
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][15],384,151);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][18],384,221);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][21],384,291);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][24],384,361);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][15],402,151);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][18],402,221);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][21],402,291);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][24],402,361);
 		
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][27],548,151);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][30],548,221);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][33],548,291);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][36],548,361);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][27],570,151);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][30],570,221);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][33],570,291);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][36],570,361);
 		
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][39],707,151);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][42],707,221);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][45],707,291);
-		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][48],707,361);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][39],727,151);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][42],727,221);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][45],727,291);
+		cContext.fillText('cLvls: ' + charArray[mPos[5]][9][48],727,361);
 		
 		var classXPlus = 0 + (mPos[2] * 163);
 		var classYPlus = 0 + (mPos[3] * 70);

@@ -13,6 +13,13 @@ function loadItems()
 		['Cloth Pants',1,100,0,0,0,0,0,'images/clothPants.jpg',0],
 		['Potion',50,100,0,0,0,0,1,'images/potion.jpg',1]
 	];
+	
+	for(var i = 0; i < itemArray.length; i++)
+	{
+		var itemImage = new Image();
+		itemImage.src = itemArray[i][8];
+		itemArray[i][8] = itemImage;
+	}
 }
 
 function getEquipmentNumber(equipNumber, statNumber, charNumber)

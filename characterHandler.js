@@ -38,6 +38,9 @@ function loadChar()
 		
 		/* General */
 		charArray[i][0] = [tempName,40,50,10,10,0,100,1,"images/" + tempName+".jpg"];
+		var charImage = new Image();
+		charImage.src = charArray[i][0][8];
+		charArray[i][0][8] = charImage;
 		
 		/* Buffs */
 		charArray[i][4] = [];
@@ -282,7 +285,6 @@ function charUseItem(charTarget)
 		attackOrderArray.splice(0,1);
 		bPos[2] = 0;
 		bPos[3] = 0;
-		buildCanvas();
 		buildAttackOrder();
 		battlePause();
 	}

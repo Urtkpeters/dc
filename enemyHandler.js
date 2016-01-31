@@ -25,6 +25,10 @@ function loadEnemies()
 			]
 		]
 	];
+	
+	var enemyImage = new Image();
+	enemyImage.src = enemyArray[0][0][0][10];
+	enemyArray[0][0][0][10] = enemyImage;
 }
 
 function getBattleEnemies()
@@ -40,9 +44,4 @@ function getBattleEnemies()
 		beArray[i][4] = enemyArray[0][0][4].slice();
 		beArray[i][5] = enemyArray[0][0][5].slice();
 	}
-}
-
-function enemyUseItem()
-{
-	
 }

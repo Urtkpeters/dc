@@ -25,7 +25,6 @@ function mapKeyPress()
 						break;
 				}
 			}
-			buildCanvas();
 			break;
 		/* A Key */
 		case 65:
@@ -37,7 +36,6 @@ function mapKeyPress()
 			{
 				cPos[2] -= 1;
 			}
-			buildCanvas();
 			break;
 		/* S Key */
 		case 83:
@@ -60,7 +58,6 @@ function mapKeyPress()
 						break;
 				}
 			}
-			buildCanvas();
 			break;
 		/* D Key */
 		case 68:
@@ -72,7 +69,6 @@ function mapKeyPress()
 			{
 				cPos[2] += 1;
 			}
-			buildCanvas();
 			break;
 		/* J Key */
 		case 74:
@@ -80,7 +76,6 @@ function mapKeyPress()
 		/* H Key */
 		case 72:
 			menuOpen = true;
-			buildCanvas();
 			break;
 	}
 	
@@ -143,7 +138,6 @@ function battleKeyPress()
 					bPos[2] = 0;
 				}
 			}
-			buildCanvas();
 			break;
 		/* A Key */
 		case 65:
@@ -248,7 +242,6 @@ function battleKeyPress()
 					battleItemSelect[0] = 0;
 				}
 			}
-			buildCanvas();
 			break;
 		/* S Key */
 		case 83:
@@ -299,7 +292,6 @@ function battleKeyPress()
 					}
 				}
 			}
-			buildCanvas();
 			break;
 		/* D Key */
 		case 68:
@@ -398,7 +390,6 @@ function battleKeyPress()
 					battleItemSelect[0] = 1;
 				}
 			}
-			buildCanvas();
 			break;
 		/* H Key */
 		case 72:
@@ -425,7 +416,6 @@ function battleKeyPress()
 					choosingItem = true;
 				}
 			}
-			buildCanvas();
 			break;
 	}
 }
@@ -460,7 +450,6 @@ function battleActionKey()
 					{
 						bPos[3] = 1;
 						choosingTarget = true;
-						buildCanvas();
 					}
 					break;
 				/* Magic */
@@ -476,7 +465,6 @@ function battleActionKey()
 							bPos[3] = 0;
 							choosingTarget = true;
 							choosingItem = false;
-							buildCanvas();
 						}
 					}
 					else if(choosingTarget == true)
@@ -488,7 +476,6 @@ function battleActionKey()
 					else
 					{
 						choosingItem = true;
-						buildCanvas();
 					}
 					break;
 				/* Defend */
@@ -993,7 +980,6 @@ function startMenuKeyPress()
 			}
 			break;
 	}
-	buildCanvas();
 }
 
 function appendOutput(outputText)

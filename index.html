@@ -25,8 +25,6 @@
 		<!-- Storage of global variables and their default values -->
 		<script src="globalVariables.js" type="text/javascript"></script>
 		<script>
-			
-			
 			/* Initial loading functions to instantiate all of the required variables with default values */
 			loadMap();
 			loadItems(); 
@@ -34,7 +32,7 @@
 			loadEnemies();
 			loadNodeArray();
 			loadClasses();
-			buildCanvas();
+			setInterval("buildCanvas();", 10);
 			
 			/* 	
 				After loading, the below listens to input from the keyboard. 
