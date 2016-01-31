@@ -59,7 +59,7 @@ function loadChar()
 		
 		/* Classes */
 		/* Squire, Knight, Berserker, Blademaster, Cleric, Paladin, Crusader, Priest, Thief, Bard, Ninja, Dragoon, Mage, Warlock, Sorcerer */
-		charArray[i][9] = [0,0,20,20,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1];
+		charArray[i][9] = [0,0,100,20,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1];
 		
 		var tmpAgi = charArray[i][6][1];
 		var tmpSpeed = 1;

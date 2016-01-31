@@ -1606,16 +1606,19 @@ function buildStatusMenu()
 					{
 						switch(classArray[mPos[5]][classNumber][yCoord][xCoord][8])
 						{
-							case 0: 
+							case 0:
+								cContext.fillStyle = '#000000';
+								break;
+							case 1: 
 								cContext.fillStyle = '#808080';
 								break;
-							case 1:
+							case 2:
 								cContext.fillStyle = '#FFFFFF';
 								break;
-							case 2:
+							case 3:
 								cContext.fillStyle = '#FF0000';
 								break;
-							case 3:
+							case 4:
 								cContext.fillStyle = '#0033CC';
 								break;
 						}
