@@ -543,6 +543,29 @@ function startMenuKeyPress()
 					break;
 				/* Equipment Menu */
 				case 3:
+					/* No logic needed for W key on char select */
+					if(menuState == 1)
+					{
+						if(mPos[4] == 0)
+						{
+							mPos[4] = 5;
+						}
+						else
+						{
+							mPos[4] -= 1;
+						}
+					}
+					else if(menuState == 2)
+					{
+						if(mPos[3] == 0)
+						{
+							mPos[3] = 5;
+						}
+						else
+						{
+							mPos[3] -= 1;
+						}
+					}
 					break;
 				/* Status Menu */
 				case 4:
@@ -631,6 +654,29 @@ function startMenuKeyPress()
 					break;
 				/* Equipment Menu */
 				case 3:
+					if(menuState == 0)
+					{
+						if(mPos[5] == 0)
+						{
+							mPos[5] = 2;
+						}
+						else
+						{
+							mPos[5] -= 1;
+						}
+					}
+					/* No logic needed for A at slot select */
+					else if(menuState == 2)
+					{
+						if(mPos[2] == 0)
+						{
+							mPos[2] = 1;
+						}
+						else
+						{
+							mPos[2] = 0;
+						}
+					}
 					break;
 				/* Status Menu */
 				case 4:
@@ -720,6 +766,29 @@ function startMenuKeyPress()
 					break;
 				/* Equipment Menu */
 				case 3:
+					/* No logic needed for W key on char select */
+					if(menuState == 1)
+					{
+						if(mPos[4] == 5)
+						{
+							mPos[4] = 0;
+						}
+						else
+						{
+							mPos[4] += 1;
+						}
+					}
+					else if(menuState == 2)
+					{
+						if(mPos[3] == 5)
+						{
+							mPos[3] = 0;
+						}
+						else
+						{
+							mPos[3] += 1;
+						}
+					}
 					break;
 				/* Status Menu */
 				case 4:
@@ -807,6 +876,29 @@ function startMenuKeyPress()
 					break;
 				/* Equipment Menu */
 				case 3:
+					if(menuState == 0)
+					{
+						if(mPos[5] == 2)
+						{
+							mPos[5] = 0;
+						}
+						else
+						{
+							mPos[5] += 1;
+						}
+					}
+					/* No logic need for D key for slot select */
+					else if(menuState == 2)
+					{
+						if(mPos[2] == 1)
+						{
+							mPos[2] = 0;
+						}
+						else
+						{
+							mPos[2] = 1;
+						}
+					}
 					break;
 				/* Status Menu */
 				case 4:
@@ -905,6 +997,18 @@ function startMenuKeyPress()
 					break;
 				/* Equipment Menu */
 				case 3:
+					if(menuState == 0)
+					{
+						menuState = 1;
+					}
+					else if(menuState == 1)
+					{
+						menuState = 2;
+					}
+					else if(menuState == 2)
+					{
+						equipItem();
+					}
 					break;
 				/* Status Menu */
 				case 4:
@@ -958,6 +1062,18 @@ function startMenuKeyPress()
 					break;
 				/* Equipment Menu */
 				case 3:
+					if(menuState == 0)
+					{
+						mPos[1] = 0;
+					}
+					else if(menuState == 1)
+					{
+						menuState = 0;
+					}
+					else if(menuState == 2)
+					{
+						menuState = 1;
+					}
 					break;
 				/* Status Menu */
 				case 4:

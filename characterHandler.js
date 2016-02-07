@@ -8,7 +8,7 @@ function loadChar()
 		4.  Buffs     - List of buff IDs
 		5.  Debuffs   - List of debuff IDs
 		6.  Stats     - Strength, Agility, Vitality, Intelligence
-		7.  Equipment - Main Hand, Off-Hand, Head, Chest, Hands, Legs, Feet, Accessory
+		7.  Equipment - Main Hand, Off-Hand, Head, Chest, Hands, Shoes, Accessory
 		8.  Inventory - List of item IDs
 		9.  Classes   - Current Class, Squire Current, Squire Max, Squire Level
 		10. Skills
@@ -52,74 +52,16 @@ function loadChar()
 		charArray[i][6] = [5,5,5,5];
 		
 		/* Equipment */
-		charArray[i][7] = [1,0,0,2,3,4,0];
+		charArray[i][7] = [1,0,0,2,3,0,0];
 		
 		/* Items */
-		charArray[i][8] = [4,4,4,0,0,0,0,0,0,0,0,0];
+		charArray[i][8] = [4,4,4,0,0,0,0,0,0,0,0,1];
 		
 		/* Classes */
-		/* Squire, Knight, Berserker, Blademaster, Cleric, Paladin, Crusader, Priest, Thief, Bard, Ninja, Dragoon, Mage, Warlock, Sorcerer */
+		/* Squire, Knight, Berserker, Blademaster, Cleric, Paladin, Crusader, Priest, Thief, Bard, Ninja, Dragoon, Mage, Warlock, Sorcerer, Enchanter */
 		charArray[i][9] = [0,0,100,20,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1,0,20,1];
 		
-		var tmpAgi = charArray[i][6][1];
-		var tmpSpeed = 1;
-		
-		if(tmpAgi == 0){tmpSpeed = 1;}
-		else if(tmpAgi == 1){tmpSpeed = 2;}
-		else if(tmpAgi == 2){tmpSpeed = 3;}
-		else if(tmpAgi == 3 || tmpAgi == 4){tmpSpeed = 4;}
-		else if(tmpAgi >= 5 && tmpAgi <= 10){tmpSpeed = 5;}
-		else if(tmpAgi >= 11 && tmpAgi <= 14){tmpSpeed = 6;}
-		else if(tmpAgi >= 15 && tmpAgi <= 19){tmpSpeed = 7;}
-		else if(tmpAgi >= 20 && tmpAgi <= 24){tmpSpeed = 8;}
-		else if(tmpAgi >= 25 && tmpAgi <= 29){tmpSpeed = 9;}
-		else if(tmpAgi >= 30 && tmpAgi <= 39){tmpSpeed = 10;}
-		else if(tmpAgi >= 40 && tmpAgi <= 49){tmpSpeed = 11;}
-		else if(tmpAgi >= 50 && tmpAgi <= 59){tmpSpeed = 12;}
-		else if(tmpAgi >= 60 && tmpAgi <= 69){tmpSpeed = 13;}
-		else if(tmpAgi >= 70 && tmpAgi <= 79){tmpSpeed = 14;}
-		else if(tmpAgi >= 80 && tmpAgi <= 99){tmpSpeed = 15;}
-		else if(tmpAgi >= 100 && tmpAgi <= 124){tmpSpeed = 16;}
-		else if(tmpAgi >= 125 && tmpAgi <= 149){tmpSpeed = 17;}
-		else if(tmpAgi >= 150 && tmpAgi <= 199){tmpSpeed = 18;}
-		else if(tmpAgi >= 200 && tmpAgi <= 254){tmpSpeed = 19;}
-		else if(tmpAgi == 255){tmpSpeed = 20;}
-		
-		/* Skills */
-		/* First array is for available skills, second array is for mastered skills */
-		charArray[i][10] = [[],[]];
-		
-		/* Offense */
-		charArray[i][1] = 
-		/* Item status effects not yet implemented, thats why the last two numbers are just zeroes */
-		[
-			(charArray[i][6][0] + getEquipmentNumber(0, 1, i)) * 0.9,
-			(charArray[i][6][0] + getEquipmentNumber(0, 1, i)) * 1.1,
-			getEquipmentNumber(0, 2, i),
-			getEquipmentNumber(0, 6, i),
-			getEquipmentNumber(0, 7, i),
-			tmpSpeed,
-			0,
-			0
-		];
-		
-		/* Magic */
-		/* Not yet implemented */
-		charArray[i][3] = [1,1,1];
-		
-		/* Defence */
-		charArray[i][2] = 
-		/* Dodge and block are fixed, need to make dynamic. Defence is just a straight reduction, need to make percentage based. */
-		[
-			0.05,
-			0.05,
-			0.8,
-			getEquipmentNumber(1, 1, i) + getEquipmentNumber(2, 1, i) + getEquipmentNumber(3, 1, i) +
-				getEquipmentNumber(4, 1, i) + getEquipmentNumber(5, 1, i) + getEquipmentNumber(6, 1, i),
-			0.05,
-			1,
-			1
-		];
+		calcCharStats(i);
 	}
 }
 
@@ -288,4 +230,227 @@ function charUseItem(charTarget)
 		buildAttackOrder();
 		battlePause();
 	}
+}
+
+function equipItem()
+{
+	var tmpItemHold = 0;
+	var canEquip = false;
+	var swapToMain = false;
+	
+	calcInventoryPosition();
+	
+	/* Is the item equipable? */
+	if(itemArray[charArray[mPos[5]][8][inventoryPos]][10] > 0)
+	{
+		tmpItemHold = charArray[mPos[5]][7][mPos[4]];
+		/* Is it equipable in this slot? */
+		// Any Slot (Empty)
+		if(itemArray[charArray[mPos[5]][8][inventoryPos]][10] == 1)
+		{
+			if(mPos[4] == 0 && itemArray[charArray[mPos[5]][7][1]][11] != 1 && itemArray[charArray[mPos[5]][7][1]][11] != 10)
+			{
+				swapToMain = true;
+			}
+			
+			canEquip = true;
+		}
+		else if(itemArray[charArray[mPos[5]][8][inventoryPos]][10] - 2 == mPos[4])
+		{
+			canEquip = true;
+		}
+		else if(mPos[4] == 1)
+		{
+			if(itemArray[charArray[mPos[5]][8][inventoryPos]][11] == itemArray[charArray[mPos[5]][7][0]][11])
+			{
+				canEquip = true;
+			}
+		}
+		
+		if(canEquip == true)
+		{
+			charArray[mPos[5]][7][mPos[4]] = charArray[mPos[5]][8][inventoryPos];
+			charArray[mPos[5]][8][inventoryPos] = tmpItemHold;
+			
+			if(swapToMain == true)
+			{
+				charArray[mPos[5]][7][mPos[4]] = charArray[mPos[5]][7][1];
+				charArray[mPos[5]][7][1] = 0;
+			}
+			
+			if(mPos[4] == 0 || mPos[4] == 1)
+			{
+				calcClass();
+			}
+			
+			calcCharStats(mPos[5]);
+			menuState = 1;
+		}
+		else
+		{
+			appendOutput("Can't equip that!");
+		}
+		
+		
+	}
+}
+
+function calcClass()
+{
+	var tmpOff = 0;
+	
+	if(itemArray[charArray[mPos[5]][7][1]][11] > 0)
+	{
+		
+		if(itemArray[charArray[mPos[5]][7][1]][11] == 1)
+		{
+			tmpOff = 0;
+		}
+		else if(itemArray[charArray[mPos[5]][7][1]][11] == 10)
+		{
+			tmpOff = 1;
+		}
+		else
+		{
+			tmpOff = 2;
+		}
+	}
+	
+	switch(itemArray[charArray[mPos[5]][7][0]][11])
+	{
+		case 1:
+			
+			break;
+		case 2:
+			switch(tmpOff)
+			{
+				case 0:
+					charArray[mPos[5]][9][0] = 0;
+					break;
+				case 1:
+					charArray[mPos[5]][9][0] = 1;
+					break;
+				case 2:
+					charArray[mPos[5]][9][0] = 2;
+					break;
+			}
+			break;
+		case 3:
+			charArray[mPos[5]][9][0] = 3;
+			break;
+		case 4:
+			switch(tmpOff)
+			{
+				case 0:
+					charArray[mPos[5]][9][0] = 4;
+					break;
+				case 1:
+					charArray[mPos[5]][9][0] = 5;
+					break;
+				case 2:
+					charArray[mPos[5]][9][0] = 6;
+					break;
+			}
+			break;
+		case 5:
+			charArray[mPos[5]][9][0] = 7;
+			break;
+		case 6:
+			switch(tmpOff)
+			{
+				case 0:
+					charArray[mPos[5]][9][0] = 8;
+					break;
+				case 1:
+					charArray[mPos[5]][9][0] = 9;
+					break;
+				case 2:
+					charArray[mPos[5]][9][0] = 10;
+					break;
+			}
+			break;
+		case 7:
+			charArray[mPos[5]][9][0] = 11;
+			break;
+		case 8:
+			switch(tmpOff)
+			{
+				case 0:
+					charArray[mPos[5]][9][0] = 12;
+					break;
+				case 1:
+					charArray[mPos[5]][9][0] = 13;
+					break;
+				case 2:
+					charArray[mPos[5]][9][0] = 14;
+					break;
+			}
+			break;
+		case 9:
+			charArray[mPos[5]][9][0] = 15;
+			break;
+	}
+}
+
+function calcCharStats(charNumber)
+{
+	var tmpAgi = charArray[charNumber][6][1];
+	var tmpSpeed = 1;
+	
+	if(tmpAgi == 0){tmpSpeed = 1;}
+	else if(tmpAgi == 1){tmpSpeed = 2;}
+	else if(tmpAgi == 2){tmpSpeed = 3;}
+	else if(tmpAgi == 3 || tmpAgi == 4){tmpSpeed = 4;}
+	else if(tmpAgi >= 5 && tmpAgi <= 10){tmpSpeed = 5;}
+	else if(tmpAgi >= 11 && tmpAgi <= 14){tmpSpeed = 6;}
+	else if(tmpAgi >= 15 && tmpAgi <= 19){tmpSpeed = 7;}
+	else if(tmpAgi >= 20 && tmpAgi <= 24){tmpSpeed = 8;}
+	else if(tmpAgi >= 25 && tmpAgi <= 29){tmpSpeed = 9;}
+	else if(tmpAgi >= 30 && tmpAgi <= 39){tmpSpeed = 10;}
+	else if(tmpAgi >= 40 && tmpAgi <= 49){tmpSpeed = 11;}
+	else if(tmpAgi >= 50 && tmpAgi <= 59){tmpSpeed = 12;}
+	else if(tmpAgi >= 60 && tmpAgi <= 69){tmpSpeed = 13;}
+	else if(tmpAgi >= 70 && tmpAgi <= 79){tmpSpeed = 14;}
+	else if(tmpAgi >= 80 && tmpAgi <= 99){tmpSpeed = 15;}
+	else if(tmpAgi >= 100 && tmpAgi <= 124){tmpSpeed = 16;}
+	else if(tmpAgi >= 125 && tmpAgi <= 149){tmpSpeed = 17;}
+	else if(tmpAgi >= 150 && tmpAgi <= 199){tmpSpeed = 18;}
+	else if(tmpAgi >= 200 && tmpAgi <= 254){tmpSpeed = 19;}
+	else if(tmpAgi == 255){tmpSpeed = 20;}
+	
+	/* Skills */
+	/* First array is for available skills, second array is for mastered skills */
+	charArray[charNumber][10] = [[],[]];
+	
+	/* Offense */
+	charArray[charNumber][1] = 
+	/* Item status effects not yet implemented, thats why the last two numbers are just zeroes */
+	[
+		(charArray[charNumber][6][0] + getEquipmentNumber(0, 1, charNumber)) * 0.9,
+		(charArray[charNumber][6][0] + getEquipmentNumber(0, 1, charNumber)) * 1.1,
+		getEquipmentNumber(0, 2, charNumber),
+		getEquipmentNumber(0, 6, charNumber),
+		getEquipmentNumber(0, 7, charNumber),
+		tmpSpeed,
+		0,
+		0
+	];
+	
+	/* Magic */
+	/* Not yet implemented */
+	charArray[charNumber][3] = [1,1,1];
+	
+	/* Defence */
+	charArray[charNumber][2] = 
+	/* Dodge and block are fixed, need to make dynamic. Defence is just a straight reduction, need to make percentage based. */
+	[
+		0.05,
+		0.05,
+		0.8,
+		getEquipmentNumber(1, 1, charNumber) + getEquipmentNumber(2, 1, charNumber) + getEquipmentNumber(3, 1, charNumber) +
+			getEquipmentNumber(4, 1, charNumber) + getEquipmentNumber(5, 1, charNumber) + getEquipmentNumber(6, 1, charNumber),
+		0.05,
+		1,
+		1
+	];
 }

@@ -45,7 +45,7 @@ function buildCanvas()
 		/* Equipment Menu */
 		else if(mPos[1] == 3)
 		{
-			buildSubMenus();
+			buildEquipmentMenu();
 		}
 		/* Status Menu */
 		else if(mPos[1] == 4)
@@ -1595,7 +1595,7 @@ function buildStatusMenu()
 					cContext.fill();
 					cContext.closePath();
 				}
-				/* Else check to se what color it is and color the node to match */
+				/* Else check to see what color it is and color the node to match */
 				else
 				{
 					if(classArray[mPos[5]][classNumber][yCoord][xCoord] == 0)
@@ -1677,5 +1677,153 @@ function buildStatusMenu()
 			cContext.fillText('Vitality: 14',15,182);
 			cContext.fillText('Agility: 1',15,198);
 		}
+	}
+}
+
+function buildEquipmentMenu()
+{
+	var charXPlus = mPos[5] * 250;
+	var slotYPlus = mPos[4] * 49;
+	var invXPlus = mPos[2] * 67;
+	var invYPlus = mPos[3] * 50;
+	
+	cContext.beginPath();
+	cContext.fillStyle = "#FFFFFF";
+	cContext.moveTo(142+charXPlus,27);
+	cContext.lineTo(152+charXPlus,37);
+	cContext.lineTo(142+charXPlus,47);
+	cContext.lineTo(142+charXPlus,27);
+	cContext.fill();
+	cContext.stroke();
+	cContext.closePath();
+	
+	if(menuState >= 1)
+	{
+		cContext.fillStyle = '#000000';
+		cContext.beginPath();
+		cContext.moveTo(0,75);
+		cContext.lineTo(1000,75);
+		cContext.lineTo(1000,425);
+		cContext.lineTo(0,425);
+		cContext.lineTo(0,75);
+		cContext.fill();
+		cContext.closePath();
+		
+		var itemImages = [];
+		var itemNames = [];
+		var equipmentImages = [];
+		var equipmentNames = [];
+		
+		for(var i = 0; i < 12; i++)
+		{
+			itemImages.push(itemArray[charArray[mPos[5]][8][i]][8]);
+			itemNames.push(itemArray[charArray[mPos[5]][8][i]][0]);
+		}
+		
+		for(var i = 0; i < 6; i++)
+		{
+			equipmentImages.push(itemArray[charArray[mPos[5]][7][i]][8]);
+			equipmentNames.push(itemArray[charArray[mPos[5]][7][i]][0]);
+		}
+		
+		
+		/* Background and Border */
+		cContext.strokeStyle = "#FFFFFF";
+		cContext.fillStyle = "#0033CC";
+		cContext.beginPath();
+		cContext.moveTo(297, 75);
+		cContext.lineTo(427, 75);
+		cContext.quadraticCurveTo(437, 75, 437, 85);
+		cContext.lineTo(437, 415);
+		cContext.quadraticCurveTo(437, 425, 427, 425);
+		cContext.lineTo(297, 425);
+		cContext.quadraticCurveTo(287, 425, 287, 415);
+		cContext.lineTo(287, 85);
+		cContext.quadraticCurveTo(287, 75, 297, 75);
+		cContext.fill();
+		cContext.stroke();
+		cContext.closePath();
+		
+		/* Background and Border */
+		cContext.strokeStyle = "#FFFFFF";
+		cContext.fillStyle = "#0033CC";
+		cContext.beginPath();
+		cContext.moveTo(552, 75);
+		cContext.lineTo(682, 75);
+		cContext.quadraticCurveTo(692, 75, 692, 85);
+		cContext.lineTo(692, 415);
+		cContext.quadraticCurveTo(692, 425, 682, 425);
+		cContext.lineTo(552, 425);
+		cContext.quadraticCurveTo(542, 425, 542, 415);
+		cContext.lineTo(542, 85);
+		cContext.quadraticCurveTo(542, 75, 552, 75);
+		cContext.fill();
+		cContext.stroke();
+		cContext.closePath();
+		
+		/* Equipment Text */
+		cContext.fillStyle = "#FFFFFF";
+		cContext.font = "16px Arial";
+		cContext.textAlign="left";
+		cContext.fillText("Main:",300,110);
+		cContext.fillText("Off:",300,159);
+		cContext.fillText("Head: ",300,208);
+		cContext.fillText("Chest: ",300,257);
+		cContext.fillText("Feet: ",300,306);
+		cContext.fillText("Acc.:",300,355);
+		
+		/* Equipment Images */
+		// Main Hand
+		cContext.drawImage(equipmentImages[0],367, 84, 40, 40);
+		// Off Hand
+		cContext.drawImage(equipmentImages[1],367, 133, 40, 40);
+		// Head
+		cContext.drawImage(equipmentImages[2],367, 182, 40, 40);
+		// Chest
+		cContext.drawImage(equipmentImages[3],367, 231, 40, 40);
+		// Legs
+		cContext.drawImage(equipmentImages[4],367, 280, 40, 40);
+		// Accessory
+		cContext.drawImage(equipmentImages[5],367, 329, 40, 40);
+		
+		
+		/* Inventory images */
+		cContext.drawImage(itemImages[0], 562, 100, 40, 40);
+		cContext.drawImage(itemImages[1], 629, 100, 40, 40);
+		cContext.drawImage(itemImages[2], 562, 150, 40, 40);
+		cContext.drawImage(itemImages[3], 629, 150, 40, 40);
+		cContext.drawImage(itemImages[4], 562, 200, 40, 40);
+		cContext.drawImage(itemImages[5], 629, 200, 40, 40);
+		cContext.drawImage(itemImages[6], 562, 250, 40, 40);
+		cContext.drawImage(itemImages[7], 629, 250, 40, 40);
+		cContext.drawImage(itemImages[8], 562, 300, 40, 40);
+		cContext.drawImage(itemImages[9], 629, 300, 40, 40);
+		cContext.drawImage(itemImages[10], 562, 350, 40, 40);
+		cContext.drawImage(itemImages[11], 629, 350, 40, 40);
+		
+		/* Slot select */
+		cContext.beginPath();
+		cContext.fillStyle = "#FFFFFF";
+		cContext.moveTo(424,94+slotYPlus);
+		cContext.lineTo(414,104+slotYPlus);
+		cContext.lineTo(424,114+slotYPlus);
+		cContext.lineTo(424,94+slotYPlus);
+		cContext.fill();
+		cContext.stroke();
+		cContext.closePath();
+	}
+	
+	if(menuState >= 2)
+	{
+		/* Slot select */
+		cContext.beginPath();
+		cContext.fillStyle = "#FFFFFF";
+		cContext.moveTo(547+invXPlus,110+invYPlus);
+		cContext.lineTo(557+invXPlus,120+invYPlus);
+		cContext.lineTo(547+invXPlus,130+invYPlus);
+		cContext.lineTo(547+invXPlus,110+invYPlus);
+		cContext.fill();
+		cContext.stroke();
+		cContext.closePath();
 	}
 }

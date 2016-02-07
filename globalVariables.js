@@ -51,3 +51,7 @@ var startMenuMovePos = [0,0];
 var classGridPos = [0,0];
 var battleItemSelect = [0,0];
 var showDescription = 0;
+
+/* For testing image placement */
+var empty_black = new Image();
+empty_black.src = 'images/empty_black.jpg';

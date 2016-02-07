@@ -2,16 +2,38 @@ function loadItems()
 {
 	/* 
 		Vertically is the itemID,
-			Name, Power, PowerChance, StatusCure, StatusInflict, StatusChance, CritChance, CritPower, Image File, Usable
+			Name, Power, PowerChance, StatusCure, StatusInflict, StatusChance, CritChance, CritPower, Image File, Usable, Equipable, Weapon Type
+				
+				Equipable
+					0 = No
+					1 = All (Empty)
+					2 = Slot 1 (Main)
+					3 = Slot 2 (Off)
+					4 = Slot 3 (Head)
+					5 = Slot 4 (Chest)
+					6 = Slot 5 (Feet)
+					7 = Slot 6 (Accessory)
+					
+				Weapon Type
+					1 = Fist
+					2 = Sword / Axe
+					3 = 2H Sword / Axe
+					4 = Mace
+					5 = Stave
+					6 = Dagger
+					7 = Lance
+					8 = Wand
+					9 = Rod
+					10 = Shield
 	*/
 	
 	itemArray = 
 	[
-		['Empty',0,100,0,0,0,0.5,1.2,'images/empty.jpg',0],
-		['Dagger',5,90,0,0,0,.05,1.2,'images/dagger.jpg',0],
-		['Cloth Tunic',1,100,0,0,0,0,0,'images/clothTunic.jpg',0],
-		['Cloth Pants',1,100,0,0,0,0,0,'images/clothPants.jpg',0],
-		['Potion',50,100,0,0,0,0,1,'images/potion.jpg',1]
+		['Empty',0,100,0,0,0,0.5,1.2,'images/empty.jpg',0,1,1],
+		['Dagger',5,90,0,0,0,.05,1.2,'images/dagger.jpg',0,2,6],
+		['Cloth Tunic',1,100,0,0,0,0,0,'images/clothTunic.jpg',0,5,0],
+		['Cloth Shoes',1,100,0,0,0,0,0,'images/clothShoes.jpg',0,6,0],
+		['Potion',50,100,0,0,0,0,1,'images/potion.jpg',1,0,0]
 	];
 	
 	for(var i = 0; i < itemArray.length; i++)
