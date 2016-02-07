@@ -1,11 +1,18 @@
 function buildCanvas()
 {
-	buildWalls();
+	if(blackBackground == true)
+	{
+		buildBlackBackground();
+	}
+	else
+	{
+		buildWalls();
+	}
+	
 	if(inCombat == true)
 	{
 		buildMonster();
-		buildMenuBackgrounds();
-		buildTopMenus();
+		buildMenuShell();
 		if(attackOrderArray[0] == 0 || attackOrderArray[0] == 1 || attackOrderArray[0] == 2)
 		{
 			buildCommandMenus();
@@ -28,19 +35,18 @@ function buildCanvas()
 	}
 	else if(menuOpen == true)
 	{
-		buildMenuBackgrounds();
-		buildTopMenus();
+		buildMenuShell();
 		buildStartMenu();
 		/* Items Menu */
 		if(mPos[1] == 1)
 		{
-			buildSubMenus();
 			buildItemMenu();
+			blackBackground = true;
 		}
 		/* Skills Menu */
 		else if(mPos[1] == 2)
 		{
-			buildSubMenus();
+			buildSkillMenu();
 		}
 		/* Equipment Menu */
 		else if(mPos[1] == 3)
@@ -56,6 +62,10 @@ function buildCanvas()
 		else if(mPos[1] == 5)
 		{
 			
+		}
+		else
+		{
+			blackBackground = false;
 		}
 		
 	}
@@ -504,7 +514,7 @@ function buildWalls()
 	}
 }
 
-function buildMenuBackgrounds()
+function buildMenuShell()
 {
 	/* Top Black Window */
 	cContext.beginPath();
@@ -515,7 +525,6 @@ function buildMenuBackgrounds()
 	cContext.lineTo(0,75);
 	cContext.lineTo(0,0);
 	cContext.fill();
-	cContext.stroke();
 	cContext.closePath();
 	
 	/* Bottom Black Window */
@@ -527,40 +536,19 @@ function buildMenuBackgrounds()
 	cContext.lineTo(0,500);
 	cContext.lineTo(0,425);
 	cContext.fill();
-	cContext.stroke();
 	cContext.closePath();
-}
-
-function buildTopMenus()
-{
+	
 	for(var i = 0; i < 3; i++)
 	{
+		var tmpBGColor = '#0033CC';
 		var xPlus = (i * 255) + 70;
 		
 		if(charArray[i][0][1] == 0)
 		{
-			cContext.fillStyle = "#FF0000";
-		}
-		else
-		{
-			cContext.fillStyle = "#0033CC";
+			tmpBGColor = '#FF0000';
 		}
 		
-		cContext.strokeStyle = "#FFFFFF";
-		
-		cContext.beginPath();
-		cContext.moveTo(100+xPlus, 4);
-		cContext.lineTo(230+xPlus, 4);
-		cContext.quadraticCurveTo(240+xPlus, 4, 240+xPlus, 14);
-		cContext.lineTo(240+xPlus, 60);
-		cContext.quadraticCurveTo(240+xPlus, 70, 230+xPlus, 70);
-		cContext.lineTo(100+xPlus, 70);
-		cContext.quadraticCurveTo(90+xPlus, 70, 90+xPlus, 60);
-		cContext.lineTo(90+xPlus, 14);
-		cContext.quadraticCurveTo(90+xPlus, 4, 100+xPlus, 4);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildMenuBox(4, 240+xPlus, 70, 90+xPlus, tmpBGColor);
 		
 		cContext.textAlign="left";
 		cContext.font = "14px Arial";
@@ -602,21 +590,7 @@ function buildCommandMenus()
 				break;
 		}
 		
-		/* Background and Border */
-		cContext.fillStyle = "#0033CC";
-		cContext.beginPath();
-		cContext.moveTo(270, 430);
-		cContext.lineTo(717, 430);
-		cContext.quadraticCurveTo(727, 430, 727, 440);
-		cContext.lineTo(727, 485);
-		cContext.quadraticCurveTo(727, 495, 717, 495);
-		cContext.lineTo(270, 495);
-		cContext.quadraticCurveTo(260, 495, 260, 485);
-		cContext.lineTo(260, 440);
-		cContext.quadraticCurveTo(260, 430, 270, 430);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildMenuBox(430, 727, 495, 260, '#0033CC');
 		
 		/* Text */
 		cContext.fillStyle = "#FFFFFF";
@@ -630,15 +604,7 @@ function buildCommandMenus()
 		cContext.fillText("Run",665,466.5);
 		
 		/* Selection Arrow */
-		cContext.beginPath();
-		cContext.fillStyle = "#FFFFFF";
-		cContext.moveTo(270+selectionX,450);
-		cContext.lineTo(280+selectionX,460);
-		cContext.lineTo(270+selectionX,470);
-		cContext.lineTo(270+selectionX,450);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildSelectionArrow(270+selectionX, 450, true);
 	}
 }
 
@@ -734,197 +700,119 @@ function buildMonster()
 
 function buildEnemyTargetSelect()
 {
+	var xPos = 0;
+	var yPos = 0;
+	
 	switch(numOfEnemies.length)
 	{
 		case 1:
-			cContext.beginPath();
-			cContext.fillStyle = "#FF0000";
-			cContext.moveTo(485,255);
-			cContext.lineTo(515,255);
-			cContext.lineTo(500,290);
-			cContext.lineTo(485,255);
-			cContext.fill();
-			cContext.closePath();
+			xPos = 485;
+			yPos = 255;
 			break;
 		case 2:
 			if(bPos[2] == 0)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(318,255);
-				cContext.lineTo(348,255);
-				cContext.lineTo(333,290);
-				cContext.lineTo(318,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 318;
+				yPos = 255;
 			}
 			else
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(651,255);
-				cContext.lineTo(681,255);
-				cContext.lineTo(666,290);
-				cContext.lineTo(651,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 651;
+				yPos = 255;
 			}
 			break;
 		case 3:
 			if(bPos[2] == 0)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(235,255);
-				cContext.lineTo(265,255);
-				cContext.lineTo(250,290);
-				cContext.lineTo(235,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 235;
+				yPos = 255;
 			}
 			else if(bPos[2] == 1)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(485,255);
-				cContext.lineTo(515,255);
-				cContext.lineTo(500,290);
-				cContext.lineTo(485,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 485;
+				yPos = 255;
 			}
 			else
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(735,255);
-				cContext.lineTo(765,255);
-				cContext.lineTo(750,290);
-				cContext.lineTo(735,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 735;
+				yPos = 255;
 			}
 			break;
 		case 4:
 			if(bPos[2] == 0)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(235,255);
-				cContext.lineTo(265,255);
-				cContext.lineTo(250,290);
-				cContext.lineTo(235,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 235;
+				yPos = 255;
 			}
 			else if(bPos[2] == 1)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(400,205);
-				cContext.lineTo(430,205);
-				cContext.lineTo(415,240);
-				cContext.lineTo(400,205);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 400;
+				yPos = 205;
 			}
 			else if(bPos[2] == 2)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(570,205);
-				cContext.lineTo(600,205);
-				cContext.lineTo(585,240);
-				cContext.lineTo(570,205);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 570;
+				yPos = 205;
 			}
 			else
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(735,255);
-				cContext.lineTo(765,255);
-				cContext.lineTo(750,290);
-				cContext.lineTo(735,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 735;
+				yPos = 255;
 			}
 			break;
 		case 5:
 			if(bPos[2] == 0)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(235,255);
-				cContext.lineTo(265,255);
-				cContext.lineTo(250,290);
-				cContext.lineTo(235,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 235;
+				yPos = 255;
 			}
 			else if(bPos[2] == 1)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(360,205);
-				cContext.lineTo(390,205);
-				cContext.lineTo(375,240);
-				cContext.lineTo(360,205);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 360;
+				yPos = 205;
 			}
 			else if(bPos[2] == 2)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(485,255);
-				cContext.lineTo(515,255);
-				cContext.lineTo(500,290);
-				cContext.lineTo(485,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 485;
+				yPos = 255;
 			}
 			else if(bPos[2] == 3)
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(610,205);
-				cContext.lineTo(640,205);
-				cContext.lineTo(625,240);
-				cContext.lineTo(610,205);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 610;
+				yPos = 205;
 			}
 			else
 			{
-				cContext.beginPath();
-				cContext.fillStyle = "#FF0000";
-				cContext.moveTo(735,255);
-				cContext.lineTo(765,255);
-				cContext.lineTo(750,290);
-				cContext.lineTo(735,255);
-				cContext.fill();
-				cContext.closePath();
+				xPos = 735;
+				yPos = 255;
 			}
 			break;
 	}
+	
+	cContext.beginPath();
+	cContext.fillStyle = "#FF0000";
+	cContext.moveTo(xPos,yPos);
+	cContext.lineTo(xPos+30,yPos);
+	cContext.lineTo(xPos+15,yPos+35);
+	cContext.lineTo(xPos,yPos);
+	cContext.fill();
+	cContext.closePath();
 }
 
 function buildCharTargetSelect()
 {
 	/* Need to put in logic to show item selected in top right corner */
-	var charXPlus = bPos[2] * 250;
-		
-	cContext.beginPath();
-	cContext.fillStyle = "#FFFFFF";
-	cContext.moveTo(142+charXPlus,27);
-	cContext.lineTo(152+charXPlus,37);
-	cContext.lineTo(142+charXPlus,47);
-	cContext.lineTo(142+charXPlus,27);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	var charXPlus = 0;
+	if(inCombat == true)
+	{
+		charXPlus = bPos[2] * 256;
+	}
+	else
+	{
+		charXPlus = mPos[5] * 256;
+	}
+	
+	buildSelectionArrow(142+charXPlus, 27, true);
 }
 
 function buildStartMenu()
@@ -947,22 +835,7 @@ function buildStartMenu()
 			break;
 	}
 	
-	/* Background and Border */
-	cContext.strokeStyle = "#FFFFFF";
-	cContext.fillStyle = "#0033CC";
-	cContext.beginPath();
-	cContext.moveTo(270, 430);
-	cContext.lineTo(717, 430);
-	cContext.quadraticCurveTo(727, 430, 727, 440);
-	cContext.lineTo(727, 485);
-	cContext.quadraticCurveTo(727, 495, 717, 495);
-	cContext.lineTo(270, 495);
-	cContext.quadraticCurveTo(260, 495, 260, 485);
-	cContext.lineTo(260, 440);
-	cContext.quadraticCurveTo(260, 430, 270, 430);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildMenuBox(430, 727, 495, 260, '#0033CC');
 	
 	/* Text */
 	cContext.fillStyle = "#FFFFFF";
@@ -974,60 +847,25 @@ function buildStartMenu()
 	cContext.fillText("Status",580,466.5);
 	cContext.fillText("Save",662,466.5);
 	
-	/* Selection Arrow */
-	if(mPos[1] == 0)
-	{
-		cContext.beginPath();
-		cContext.fillStyle = "#FFFFFF";
-		cContext.moveTo(270+selectionX,450);
-		cContext.lineTo(280+selectionX,460);
-		cContext.lineTo(270+selectionX,470);
-		cContext.lineTo(270+selectionX,450);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
-	}
-}
-
-function buildSubMenus()
-{
-	cContext.fillStyle = '#000000';
-	cContext.beginPath();
-	cContext.moveTo(0,75);
-	cContext.lineTo(1000,75);
-	cContext.lineTo(1000,425);
-	cContext.lineTo(0,425);
-	cContext.lineTo(0,75);
-	cContext.fill();
-	cContext.closePath();
-	
-	for(var i = 0; i < charArray.length; i++)
-	{
-		var xPlus = (i * 255) + 70;
-		
-		/* Background and Border */
-		cContext.strokeStyle = "#FFFFFF";
-		cContext.fillStyle = "#0033CC";
-		cContext.beginPath();
-		cContext.moveTo(100+xPlus, 75);
-		cContext.lineTo(230+xPlus, 75);
-		cContext.quadraticCurveTo(240+xPlus, 75, 240+xPlus, 85);
-		cContext.lineTo(240+xPlus, 415);
-		cContext.quadraticCurveTo(240+xPlus, 425, 230+xPlus, 425);
-		cContext.lineTo(100+xPlus, 425);
-		cContext.quadraticCurveTo(90+xPlus, 425, 90+xPlus, 415);
-		cContext.lineTo(90+xPlus, 85);
-		cContext.quadraticCurveTo(90+xPlus, 75, 100+xPlus, 75);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
-	}
+	buildSelectionArrow(270+selectionX, 450, true);
 }
 
 function buildItemMenu()
 {
 	var itemImages = [];
 	var itemNames = [];
+	var columnX = 0;
+	var xPlus = 0;
+	var yPlus = 0;
+	var textPosX = 65;
+	var textPosY = 124;
+	var windPosX = 70;
+	var windPosY = 110;
+	var openMenu = 0;
+	
+	calcInventoryPosition();
+	
+	// Load images and names into a usable array.
 	for(var i = 0; i < 3; i++)
 	{
 		itemImages.push([]);
@@ -1039,50 +877,31 @@ function buildItemMenu()
 		}
 	}
 	
-	/* Character 1 */
-	cContext.drawImage(itemImages[0][0], 180, 100, 40, 40);
-	cContext.drawImage(itemImages[0][1], 247, 100, 40, 40);
-	cContext.drawImage(itemImages[0][2], 180, 150, 40, 40);
-	cContext.drawImage(itemImages[0][3], 247, 150, 40, 40);
-	cContext.drawImage(itemImages[0][4], 180, 200, 40, 40);
-	cContext.drawImage(itemImages[0][5], 247, 200, 40, 40);
-	cContext.drawImage(itemImages[0][6], 180, 250, 40, 40);
-	cContext.drawImage(itemImages[0][7], 247, 250, 40, 40);
-	cContext.drawImage(itemImages[0][8], 180, 300, 40, 40);
-	cContext.drawImage(itemImages[0][9], 247, 300, 40, 40);
-	cContext.drawImage(itemImages[0][10], 180, 350, 40, 40);
-	cContext.drawImage(itemImages[0][11], 247, 350, 40, 40);
+	// Begin loading the visual aspects starting with the black background
+	buildBlackBackground();
 	
-	/* Character 2 */
-	cContext.drawImage(itemImages[1][0], 435, 100, 40, 40);
-	cContext.drawImage(itemImages[1][1], 502, 100, 40, 40);
-	cContext.drawImage(itemImages[1][2], 435, 150, 40, 40);
-	cContext.drawImage(itemImages[1][3], 502, 150, 40, 40);
-	cContext.drawImage(itemImages[1][4], 435, 200, 40, 40);
-	cContext.drawImage(itemImages[1][5], 502, 200, 40, 40);
-	cContext.drawImage(itemImages[1][6], 435, 250, 40, 40);
-	cContext.drawImage(itemImages[1][7], 502, 250, 40, 40);
-	cContext.drawImage(itemImages[1][8], 435, 300, 40, 40);
-	cContext.drawImage(itemImages[1][9], 502, 300, 40, 40);
-	cContext.drawImage(itemImages[1][10], 435, 350, 40, 40);
-	cContext.drawImage(itemImages[1][11], 502, 350, 40, 40);
+	// Drawing the menu boxes first then loading the images onto them. Loops once per character
+	for(var i = 0; i < charArray.length; i++)
+	{
+		var loopXPlus = i * 255;
+		
+		buildMenuBox(75, 310+loopXPlus, 425, 160+loopXPlus, '#0033CC');
+		
+		cContext.drawImage(itemImages[i][0], 180+loopXPlus, 100, 40, 40);
+		cContext.drawImage(itemImages[i][1], 247+loopXPlus, 100, 40, 40);
+		cContext.drawImage(itemImages[i][2], 180+loopXPlus, 150, 40, 40);
+		cContext.drawImage(itemImages[i][3], 247+loopXPlus, 150, 40, 40);
+		cContext.drawImage(itemImages[i][4], 180+loopXPlus, 200, 40, 40);
+		cContext.drawImage(itemImages[i][5], 247+loopXPlus, 200, 40, 40);
+		cContext.drawImage(itemImages[i][6], 180+loopXPlus, 250, 40, 40);
+		cContext.drawImage(itemImages[i][7], 247+loopXPlus, 250, 40, 40);
+		cContext.drawImage(itemImages[i][8], 180+loopXPlus, 300, 40, 40);
+		cContext.drawImage(itemImages[i][9], 247+loopXPlus, 300, 40, 40);
+		cContext.drawImage(itemImages[i][10], 180+loopXPlus, 350, 40, 40);
+		cContext.drawImage(itemImages[i][11], 247+loopXPlus, 350, 40, 40);
+	}
 	
-	/* Character 3 */
-	cContext.drawImage(itemImages[2][0], 690, 100, 40, 40);
-	cContext.drawImage(itemImages[2][1], 757, 100, 40, 40);
-	cContext.drawImage(itemImages[2][2], 690, 150, 40, 40);
-	cContext.drawImage(itemImages[2][3], 757, 150, 40, 40);
-	cContext.drawImage(itemImages[2][4], 690, 200, 40, 40);
-	cContext.drawImage(itemImages[2][5], 757, 200, 40, 40);
-	cContext.drawImage(itemImages[2][6], 690, 250, 40, 40);
-	cContext.drawImage(itemImages[2][7], 757, 250, 40, 40);
-	cContext.drawImage(itemImages[2][8], 690, 300, 40, 40);
-	cContext.drawImage(itemImages[2][9], 757, 300, 40, 40);
-	cContext.drawImage(itemImages[2][10], 690, 350, 40, 40);
-	cContext.drawImage(itemImages[2][11], 757, 350, 40, 40);
-	
-	var columnX = 0;
-	
+	// Check to see which column the selection arrow is on
 	if(mPos[2] == 2 || mPos[2] == 3)
 	{
 		columnX = 122;
@@ -1092,27 +911,12 @@ function buildItemMenu()
 		columnX = 244;
 	}
 	
-	var xPlus = (mPos[2] * 67) + columnX;
-	var yPlus = mPos[3] * 50;
+	xPlus = (mPos[2] * 67) + columnX;
+	yPlus = mPos[3] * 50;
 	
-	/* Selection Arrow */
-	cContext.beginPath();
-	cContext.fillStyle = "#FFFFFF";
-	cContext.moveTo(165+xPlus,110+yPlus);
-	cContext.lineTo(175+xPlus,120+yPlus);
-	cContext.lineTo(165+xPlus,130+yPlus);
-	cContext.lineTo(165+xPlus,110+yPlus);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildSelectionArrow(165+xPlus,110+yPlus, true);
 	
-	var textPosX = 65;
-	var textPosY = 124;
-	var windPosX = 70;
-	var windPosY = 110;
-	var openMenu = 0;
-	
-	/* Selection Item Name */
+	// Position of the floating window for item name
 	switch(mPos[2])
 	{
 		case 0:
@@ -1147,36 +951,25 @@ function buildItemMenu()
 		openMenu = 48;
 	}
 	
-	/* Background and Border */
-	cContext.fillStyle = "#0033CC";
-	cContext.beginPath();
-	cContext.moveTo(windPosX, windPosY);
-	cContext.lineTo(windPosX+72, windPosY);
-	cContext.quadraticCurveTo(windPosX+82, windPosY, windPosX+82, windPosY+10);
-	cContext.lineTo(windPosX+82, windPosY+5+openMenu);
-	cContext.quadraticCurveTo(windPosX+82, windPosY+20+openMenu, windPosX+72, windPosY+20+openMenu);
-	cContext.lineTo(windPosX, windPosY+20+openMenu);
-	cContext.quadraticCurveTo(windPosX-10, windPosY+20+openMenu, windPosX-10, windPosY+10+openMenu);
-	cContext.lineTo(windPosX-10, windPosY+10);
-	cContext.quadraticCurveTo(windPosX-10, windPosY, windPosX, windPosY);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	// Now that the position of the floating window is found, draw the window and then put the text in it
+	buildMenuBox(windPosY, windPosX+82, windPosY+20+openMenu, windPosX-10, '#0033CC');
 	
 	cContext.fillStyle = "#FFFFFF";
 	cContext.font = "14px Arial";
-	
-	calcInventoryPosition();
-	
+	cContext.textAlign="left";
 	cContext.fillText(itemNames[charItemPos][inventoryPos],textPosX,textPosY);
+	
 	if(menuState >= 1)
 	{
+		// Line for splitting the item name from the actions
 		cContext.strokeStyle = "#FFFFFF";
 		cContext.beginPath();
 		cContext.moveTo(windPosX - 5, windPosY + 18);
 		cContext.lineTo(windPosX + 77, windPosY + 18);
 		cContext.stroke();
 		cContext.closePath();
+		
+		// Text highlighting to choose menu option
 		if(mPos[4] == 0)
 		{
 			cContext.fillStyle = "#E3E600";
@@ -1207,18 +1000,9 @@ function buildItemMenu()
 	
 	if(menuState == 2)
 	{
-		var charXPlus = mPos[5] * 250;
-		
-		cContext.beginPath();
-		cContext.fillStyle = "#FFFFFF";
-		cContext.moveTo(142+charXPlus,27);
-		cContext.lineTo(152+charXPlus,37);
-		cContext.lineTo(142+charXPlus,47);
-		cContext.lineTo(142+charXPlus,27);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildCharTargetSelect();
 	}
+	// Move items in inventory
 	else if(menuState == 3)
 	{
 		var columnX2 = 0;
@@ -1235,16 +1019,7 @@ function buildItemMenu()
 		var xPlus2 = (startMenuMovePos[0] * 67) + columnX2;
 		var yPlus2 = startMenuMovePos[1] * 50;
 		
-		/* Selection Arrow */
-		cContext.beginPath();
-		cContext.fillStyle = "#E3E600";
-		cContext.moveTo(165+xPlus2,110+yPlus2);
-		cContext.lineTo(175+xPlus2,120+yPlus2);
-		cContext.lineTo(165+xPlus2,130+yPlus2);
-		cContext.lineTo(165+xPlus2,110+yPlus2);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildSelectionArrow(165+xPlus2, 110+yPlus2, true);
 	}
 }
 
@@ -1256,26 +1031,11 @@ function buildBattleItemSelect()
 	
 	for(var i = 0; i < 12; i++)
 	{
-		itemImages.push(itemArray[charArray[attackOrde1rArray[0]][8][i]][8]);
+		itemImages.push(itemArray[charArray[attackOrderArray[0]][8][i]][8]);
 		itemNames.push(itemArray[charArray[attackOrderArray[0]][8][i]][0]);
 	}
 	
-	/* Background and Border */
-	cContext.strokeStyle = "#FFFFFF";
-	cContext.fillStyle = "#0033CC";
-	cContext.beginPath();
-	cContext.moveTo(170+xPlus, 75);
-	cContext.lineTo(300+xPlus, 75);
-	cContext.quadraticCurveTo(310+xPlus, 75, 310+xPlus, 85);
-	cContext.lineTo(310+xPlus, 415);
-	cContext.quadraticCurveTo(310+xPlus, 425, 300+xPlus, 425);
-	cContext.lineTo(170+xPlus, 425);
-	cContext.quadraticCurveTo(160+xPlus, 425, 160+xPlus, 415);
-	cContext.lineTo(160+xPlus, 85);
-	cContext.quadraticCurveTo(160+xPlus, 75, 170+xPlus, 75);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildMenuBox(75, 310+xPlus, 425, 160+xPlus, '#0033CC');
 	
 	cContext.drawImage(itemImages[0], 180+xPlus, 100, 40, 40);
 	cContext.drawImage(itemImages[1], 247+xPlus, 100, 40, 40);
@@ -1304,16 +1064,7 @@ function buildBattleItemSelect()
 	var xPlus2 = (battleItemSelect[0] * 67) + columnX;
 	var yPlus = battleItemSelect[1] * 50;
 	
-	/* Selection Arrow */
-	cContext.beginPath();
-	cContext.fillStyle = "#FFFFFF";
-	cContext.moveTo(165+xPlus2,110+yPlus);
-	cContext.lineTo(175+xPlus2,120+yPlus);
-	cContext.lineTo(165+xPlus2,130+yPlus);
-	cContext.lineTo(165+xPlus2,110+yPlus);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildSelectionArrow(165+xPlus2, 110+yPlus, true);
 	
 	var textPosX = 65;
 	var textPosY = 124;
@@ -1354,24 +1105,11 @@ function buildBattleItemSelect()
 	textPosY += battleItemSelect[1] * 50;
 	windPosY += battleItemSelect[1] * 50;
 	
-	/* Background and Border */
-	cContext.fillStyle = "#0033CC";
-	cContext.beginPath();
-	cContext.moveTo(windPosX, windPosY);
-	cContext.lineTo(windPosX+72, windPosY);
-	cContext.quadraticCurveTo(windPosX+82, windPosY, windPosX+82, windPosY+10);
-	cContext.lineTo(windPosX+82, windPosY+5);
-	cContext.quadraticCurveTo(windPosX+82, windPosY+20, windPosX+72, windPosY+20);
-	cContext.lineTo(windPosX, windPosY+20);
-	cContext.quadraticCurveTo(windPosX-10, windPosY+20, windPosX-10, windPosY+10);
-	cContext.lineTo(windPosX-10, windPosY+10);
-	cContext.quadraticCurveTo(windPosX-10, windPosY, windPosX, windPosY);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildMenuBox(windPosY, windPosX+82, windPosY+20, windPosX-10, '#0033CC');
 	
 	cContext.fillStyle = "#FFFFFF";
 	cContext.font = "14px Arial";
+	cContext.alignText = 'left';
 	
 	calcInventoryPosition();
 	
@@ -1380,50 +1118,20 @@ function buildBattleItemSelect()
 
 function buildStatusMenu()
 {
-	var charXPlus = mPos[5] * 250;
-			
-	cContext.beginPath();
-	cContext.fillStyle = "#FFFFFF";
-	cContext.moveTo(142+charXPlus,27);
-	cContext.lineTo(152+charXPlus,37);
-	cContext.lineTo(142+charXPlus,47);
-	cContext.lineTo(142+charXPlus,27);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildCharTargetSelect();
 	
 	if(menuState >= 1)
 	{
-		cContext.fillStyle = '#000000';
-		cContext.beginPath();
-		cContext.moveTo(0,75);
-		cContext.lineTo(1000,75);
-		cContext.lineTo(1000,425);
-		cContext.lineTo(0,425);
-		cContext.lineTo(0,75);
-		cContext.fill();
-		cContext.closePath();
-		
-		/* Background and Border */
-		cContext.strokeStyle = "#FFFFFF";
-		cContext.fillStyle = "#0033CC";
-		cContext.beginPath();
-		cContext.moveTo(170, 75);
-		cContext.lineTo(810, 75);
-		cContext.quadraticCurveTo(820, 75, 820, 85);
-		cContext.lineTo(820, 415);
-		cContext.quadraticCurveTo(820, 425, 810, 425);
-		cContext.lineTo(170, 425);
-		cContext.quadraticCurveTo(160, 425, 160, 415);
-		cContext.lineTo(160, 85);
-		cContext.quadraticCurveTo(160, 75, 170, 75);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildMenuBox(75, 820, 425, 160, '#0033CC');
 	}
 	
-	if(menuState == 1)
+	if(menuState == 0)
 	{
+		blackBackground = false;
+	}
+	else if(menuState == 1)
+	{
+		blackBackground = true;
 		cContext.fillStyle = "#FFFFFF";
 		cContext.textAlign="center";
 		
@@ -1478,22 +1186,16 @@ function buildStatusMenu()
 		var classXPlus = 0 + (mPos[2] * 163);
 		var classYPlus = 0 + (mPos[3] * 70);
 		
-		cContext.beginPath();
-		cContext.fillStyle = "#FFFFFF";
-		cContext.moveTo(188+classXPlus,120+classYPlus);
-		cContext.lineTo(198+classXPlus,130+classYPlus);
-		cContext.lineTo(188+classXPlus,140+classYPlus);
-		cContext.lineTo(188+classXPlus,120+classYPlus);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildSelectionArrow(188+classXPlus, 120+classYPlus, true);
 	}
 	else if(menuState == 2)
 	{
+		var classNumber = getClassNumber();
+		
 		cContext.fillStyle = "#FFFFFF";
 		cContext.font = "22px Arial";
 		cContext.textAlign="center";
-		cContext.fillText('Squire',490,105);
+		cContext.fillText(classNames[classNumber],490,105);
 		
 		/* Black background box for grid */
 		cContext.fillStyle = '#000000';
@@ -1519,8 +1221,6 @@ function buildStatusMenu()
 		cContext.closePath();
 		
 		cContext.fillStyle = '#000000';
-		
-		var classNumber = getClassNumber();
 		
 		/* Loops through whole grid row by row */
 		for(var i = 0; i < 15; i++)
@@ -1637,22 +1337,7 @@ function buildStatusMenu()
 		}
 		
 		/* For displaying left wing menu for node stats */
-		/* Background and Border */
-		cContext.strokeStyle = "#FFFFFF";
-		cContext.fillStyle = "#0033CC";
-		cContext.beginPath();
-		cContext.moveTo(15, 75);
-		cContext.lineTo(160, 75);
-		cContext.quadraticCurveTo(170, 75, 170, 85);
-		cContext.lineTo(170, 415);
-		cContext.quadraticCurveTo(170, 425, 160, 425);
-		cContext.lineTo(15, 425);
-		cContext.quadraticCurveTo(5, 425, 5, 415);
-		cContext.lineTo(5, 85);
-		cContext.quadraticCurveTo(5, 75, 15, 75);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildMenuBox(75, 170,425, 5, '#0033CC');
 		
 		if(classArray[mPos[5]][classNumber][startMenuMovePos[1]][startMenuMovePos[0]][8] > 0)
 		{
@@ -1682,37 +1367,24 @@ function buildStatusMenu()
 
 function buildEquipmentMenu()
 {
-	var charXPlus = mPos[5] * 250;
 	var slotYPlus = mPos[4] * 49;
 	var invXPlus = mPos[2] * 67;
 	var invYPlus = mPos[3] * 50;
 	
-	cContext.beginPath();
-	cContext.fillStyle = "#FFFFFF";
-	cContext.moveTo(142+charXPlus,27);
-	cContext.lineTo(152+charXPlus,37);
-	cContext.lineTo(142+charXPlus,47);
-	cContext.lineTo(142+charXPlus,27);
-	cContext.fill();
-	cContext.stroke();
-	cContext.closePath();
+	buildCharTargetSelect();
 	
-	if(menuState >= 1)
+	if(menuState == 0)
 	{
-		cContext.fillStyle = '#000000';
-		cContext.beginPath();
-		cContext.moveTo(0,75);
-		cContext.lineTo(1000,75);
-		cContext.lineTo(1000,425);
-		cContext.lineTo(0,425);
-		cContext.lineTo(0,75);
-		cContext.fill();
-		cContext.closePath();
-		
+		blackBackground = false;
+	}
+	else if(menuState >= 1)
+	{
 		var itemImages = [];
 		var itemNames = [];
 		var equipmentImages = [];
 		var equipmentNames = [];
+		
+		blackBackground = true;
 		
 		for(var i = 0; i < 12; i++)
 		{
@@ -1726,40 +1398,8 @@ function buildEquipmentMenu()
 			equipmentNames.push(itemArray[charArray[mPos[5]][7][i]][0]);
 		}
 		
-		
-		/* Background and Border */
-		cContext.strokeStyle = "#FFFFFF";
-		cContext.fillStyle = "#0033CC";
-		cContext.beginPath();
-		cContext.moveTo(297, 75);
-		cContext.lineTo(427, 75);
-		cContext.quadraticCurveTo(437, 75, 437, 85);
-		cContext.lineTo(437, 415);
-		cContext.quadraticCurveTo(437, 425, 427, 425);
-		cContext.lineTo(297, 425);
-		cContext.quadraticCurveTo(287, 425, 287, 415);
-		cContext.lineTo(287, 85);
-		cContext.quadraticCurveTo(287, 75, 297, 75);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
-		
-		/* Background and Border */
-		cContext.strokeStyle = "#FFFFFF";
-		cContext.fillStyle = "#0033CC";
-		cContext.beginPath();
-		cContext.moveTo(552, 75);
-		cContext.lineTo(682, 75);
-		cContext.quadraticCurveTo(692, 75, 692, 85);
-		cContext.lineTo(692, 415);
-		cContext.quadraticCurveTo(692, 425, 682, 425);
-		cContext.lineTo(552, 425);
-		cContext.quadraticCurveTo(542, 425, 542, 415);
-		cContext.lineTo(542, 85);
-		cContext.quadraticCurveTo(542, 75, 552, 75);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildMenuBox(75, 437, 425, 287, '#0033CC');
+		buildMenuBox(75, 692, 425, 542, '#0033CC');
 		
 		/* Equipment Text */
 		cContext.fillStyle = "#FFFFFF";
@@ -1801,29 +1441,88 @@ function buildEquipmentMenu()
 		cContext.drawImage(itemImages[10], 562, 350, 40, 40);
 		cContext.drawImage(itemImages[11], 629, 350, 40, 40);
 		
-		/* Slot select */
-		cContext.beginPath();
-		cContext.fillStyle = "#FFFFFF";
-		cContext.moveTo(424,94+slotYPlus);
-		cContext.lineTo(414,104+slotYPlus);
-		cContext.lineTo(424,114+slotYPlus);
-		cContext.lineTo(424,94+slotYPlus);
-		cContext.fill();
-		cContext.stroke();
-		cContext.closePath();
+		buildSelectionArrow(414,94+slotYPlus,false);
 	}
 	
 	if(menuState >= 2)
 	{
-		/* Slot select */
+		buildSelectionArrow(547+invXPlus, 110+invYPlus, true);
+	}
+}
+
+function buildMenuBox(c1, c2, c3, c4, bgColor)
+{
+	cContext.strokeStyle = '#FFFFFF';
+	cContext.fillStyle = bgColor;
+	cContext.beginPath();
+	cContext.moveTo(c4+10, c1);
+	cContext.lineTo(c2-10, c1);
+	cContext.quadraticCurveTo(c2, c1, c2, c1+10);
+	cContext.lineTo(c2, c3-10);
+	cContext.quadraticCurveTo(c2, c3, c2-10, c3);
+	cContext.lineTo(c4+10, c3);
+	cContext.quadraticCurveTo(c4, c3, c4, c3-10);
+	cContext.lineTo(c4, c1+10);
+	cContext.quadraticCurveTo(c4, c1, c4+10, c1);
+	cContext.fill();
+	cContext.stroke();
+	cContext.closePath();
+}
+
+function buildSelectionArrow (xPos, yPos, defaultDir)
+{
+	if(defaultDir == true)
+	{
 		cContext.beginPath();
 		cContext.fillStyle = "#FFFFFF";
-		cContext.moveTo(547+invXPlus,110+invYPlus);
-		cContext.lineTo(557+invXPlus,120+invYPlus);
-		cContext.lineTo(547+invXPlus,130+invYPlus);
-		cContext.lineTo(547+invXPlus,110+invYPlus);
+		cContext.moveTo(xPos,yPos);
+		cContext.lineTo(xPos+10,yPos+10);
+		cContext.lineTo(xPos,yPos+20);
+		cContext.lineTo(xPos,yPos);
 		cContext.fill();
 		cContext.stroke();
 		cContext.closePath();
+	}
+	else
+	{
+		cContext.beginPath();
+		cContext.fillStyle = "#FFFFFF";
+		cContext.moveTo(xPos+10,yPos);
+		cContext.lineTo(xPos,yPos+10);
+		cContext.lineTo(xPos+10,yPos+20);
+		cContext.lineTo(xPos+10,yPos);
+		cContext.fill();
+		cContext.stroke();
+		cContext.closePath();
+	}
+}
+
+function buildBlackBackground()
+{
+	cContext.fillStyle = '#000000';
+	cContext.beginPath();
+	cContext.moveTo(0,75);
+	cContext.lineTo(1000,75);
+	cContext.lineTo(1000,425);
+	cContext.lineTo(0,425);
+	cContext.lineTo(0,75);
+	cContext.fill();
+	cContext.closePath();
+}
+
+function buildSkillMenu()
+{
+	buildCharTargetSelect();
+	
+	if(menuState == 0)
+	{
+		blackBackground = false;
+	}
+	else if(menuState >= 1)
+	{
+		blackBackground = true;
+		
+		buildMenuBox(75, 437, 425, 287, '#0033CC');
+		buildMenuBox(75, 692, 425, 542, '#0033CC');
 	}
 }

@@ -30,7 +30,9 @@ var charArray = [];
 var itemArray = [];
 var enemyArray = [];
 var classArray = [];
+var classNames = ['Squire','Knight','Berserker','Blademaster','Cleric','Paladin','Crusader','Priest','Thief','Bard','Ninja','Dragoon','Mage','Warlock','Sorcerer','Enchanter'];
 var nodeArray = [];
+var skillArray = [];
 var beArray = [];
 var inCombat = false;
 var choosingTarget = false;
@@ -46,11 +48,14 @@ var actionPause = false;
 var menuOpen = false;
 var inventoryPos;
 var charItemPos = 0;
+var skillPos = 0;
 var menuState = 0;
 var startMenuMovePos = [0,0];
 var classGridPos = [0,0];
 var battleItemSelect = [0,0];
+var battleSkillSelect = [0,0];
 var showDescription = 0;
+var blackBackground = false;
 
 /* For testing image placement */
 var empty_black = new Image();

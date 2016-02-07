@@ -7,11 +7,12 @@ function loadChar()
 		3.  Magic     - Power Factor, Heal Factor, Magic Hit Chance
 		4.  Buffs     - List of buff IDs
 		5.  Debuffs   - List of debuff IDs
-		6.  Stats     - Strength, Agility, Vitality, Intelligence
+		6.  Stats     - Strength, Agility, Vitality, Intelligence, Skill Slots Unlocked
 		7.  Equipment - Main Hand, Off-Hand, Head, Chest, Hands, Shoes, Accessory
 		8.  Inventory - List of item IDs
 		9.  Classes   - Current Class, Squire Current, Squire Max, Squire Level
-		10. Skills
+		10. Skills    - Skill ID, Unlocked, Mastery Points
+		11. Skill Eq  - List of Skill IDs
 		
 			Strength = Damage of attack, Amount of damage blocked
 			Agility = Speed in attack order, dodge chance
@@ -49,7 +50,7 @@ function loadChar()
 		charArray[i][5] = [];
 		
 		/* Stats */
-		charArray[i][6] = [5,5,5,5];
+		charArray[i][6] = [5,5,5,5,1];
 		
 		/* Equipment */
 		charArray[i][7] = [1,0,0,2,3,0,0];
@@ -281,6 +282,7 @@ function equipItem()
 			if(mPos[4] == 0 || mPos[4] == 1)
 			{
 				calcClass();
+				calcSkills();
 			}
 			
 			calcCharStats(mPos[5]);
@@ -419,8 +421,13 @@ function calcCharStats(charNumber)
 	else if(tmpAgi == 255){tmpSpeed = 20;}
 	
 	/* Skills */
-	/* First array is for available skills, second array is for mastered skills */
-	charArray[charNumber][10] = [[],[]];
+	charArray[charNumber][10] = [
+	                             	[0, 2, 0],
+	                             	[1, 1, 0]
+	                            ];
+	
+	/* Skill Eq */
+	charArray[charNumber][11] = [1];
 	
 	/* Offense */
 	charArray[charNumber][1] = 
@@ -440,9 +447,9 @@ function calcCharStats(charNumber)
 	/* Not yet implemented */
 	charArray[charNumber][3] = [1,1,1];
 	
-	/* Defence */
+	/* Defense */
 	charArray[charNumber][2] = 
-	/* Dodge and block are fixed, need to make dynamic. Defence is just a straight reduction, need to make percentage based. */
+	/* Dodge and block are fixed, need to make dynamic. Defense is just a straight reduction, need to make percentage based. */
 	[
 		0.05,
 		0.05,
@@ -453,4 +460,20 @@ function calcCharStats(charNumber)
 		1,
 		1
 	];
+}
+
+function calcSkills(charNumber)
+{
+	var classNumber = charArray[charNumber][9][0];
+	
+	for(var i = 0; i < charArray[charNumber][6][4]; i++)
+	{
+		if(charArray[charNumber][10][charArray[charNumber][11][i]][1] != 2)
+		{
+			if(skillArray[charArray[charNumber][11][i]][1] != classNumber)
+			{
+				charArray[charNumber][11][i] = 0;
+			}
+		}
+	}
 }

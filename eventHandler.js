@@ -540,6 +540,7 @@ function startMenuKeyPress()
 					break;
 				/* Skills Menu */
 				case 2:
+					/* No logic needed for W at char select */
 					break;
 				/* Equipment Menu */
 				case 3:
@@ -651,6 +652,17 @@ function startMenuKeyPress()
 					break;
 				/* Skills Menu */
 				case 2:
+					if(menuState == 0)
+					{
+						if(mPos[5] == 0)
+						{
+							mPos[5] = 2;
+						}
+						else
+						{
+							mPos[5] -= 1;
+						}
+					}
 					break;
 				/* Equipment Menu */
 				case 3:
@@ -763,10 +775,11 @@ function startMenuKeyPress()
 					break;
 				/* Skills Menu */
 				case 2:
+					/* No logic needed for S key on char select */
 					break;
 				/* Equipment Menu */
 				case 3:
-					/* No logic needed for W key on char select */
+					/* No logic needed for S key on char select */
 					if(menuState == 1)
 					{
 						if(mPos[4] == 5)
@@ -873,6 +886,17 @@ function startMenuKeyPress()
 					break;
 				/* Skills Menu */
 				case 2:
+					if(menuState == 0)
+					{
+						if(mPos[5] == 2)
+						{
+							mPos[5] = 0;
+						}
+						else
+						{
+							mPos[5] += 1;
+						}
+					}
 					break;
 				/* Equipment Menu */
 				case 3:
@@ -994,6 +1018,10 @@ function startMenuKeyPress()
 					break;
 				/* Skills Menu */
 				case 2:
+					if(menuState == 0)
+					{
+						menuState = 1;
+					}
 					break;
 				/* Equipment Menu */
 				case 3:
@@ -1059,6 +1087,18 @@ function startMenuKeyPress()
 					break;
 				/* Skills Menu */
 				case 2:
+					if(menuState == 0)
+					{
+						mPos[1] = 0;
+					}
+					else if(menuState == 1)
+					{
+						menuState = 0;
+					}
+					else if(menuState == 2)
+					{
+						menuState = 1;
+					}
 					break;
 				/* Equipment Menu */
 				case 3:
